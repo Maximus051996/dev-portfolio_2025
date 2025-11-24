@@ -1,0 +1,104 @@
+/* ============================
+   FLOAT ANIMATION (LIGHT)
+============================ */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 4.5s ease-in-out infinite;
+}
+
+/* ============================
+   LIGHT SVG GLOW
+============================ */
+@keyframes glowPulse {
+  0%   { filter: drop-shadow(0 0 4px rgba(96,165,250,0.25)); }
+  50%  { filter: drop-shadow(0 0 10px rgba(139,92,246,0.35)); }
+  100% { filter: drop-shadow(0 0 4px rgba(236,72,153,0.25)); }
+}
+
+.envelope-svg {
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+/* ============================
+   GLASS BOX - CLEAN LOOK
+============================ */
+.form-box {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(14px);
+  padding: 2rem;
+  border-radius: 20px;
+  border: 1px solid #eef2ff;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+}
+
+/* Small screens fix */
+@media (max-width: 480px) {
+  .form-box {
+    padding: 1.3rem;
+    border-radius: 16px;
+  }
+}
+
+/* ============================
+   INPUTS - LIGHT & SIMPLE
+============================ */
+.form-input {
+  width: 100%;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: .25s ease;
+}
+
+.form-input:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 6px rgba(96,165,250,0.25);
+  background: white;
+}
+
+/* ============================
+   BUTTON - LIGHT GRADIENT
+============================ */
+.send-btn {
+  width: 100%;
+  background: linear-gradient(to right, #60a5fa, #8b5cf6);
+  padding: 12px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 600;
+  transition: .25s ease;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.send-btn:hover {
+  filter: brightness(1.07);
+}
+
+.send-btn:active {
+  transform: scale(0.98);
+}
+
+/* Disable */
+button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Success */
+.success-text {
+  animation: fadeIn .6s ease-out;
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}

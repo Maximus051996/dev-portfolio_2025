@@ -1,0 +1,40 @@
+[
+  {
+    "company": "Deloitte",
+    "role": "Consultant",
+    "duration": "Feb 2024 – Present",
+    "highlights": [
+      "Delivered scalable backend services using .NET Core with JWT authentication, RBAC, middleware, and structured logging to ensure 90% uptime and production stability.",
+      "Optimized EF Core and LINQ queries improving API response times by 30% and boosting throughput on critical modules.",
+      "Developed high-performance Angular front-end applications using RxJS, lazy loading, and real-time dashboards to enhance UX and operational efficiency."
+    ]
+  },
+  {
+    "company": "LTIMindtree",
+    "role": "Senior Software Engineer",
+    "duration": "Oct 2021 – Feb 2024",
+    "highlights": [
+      "Led scalable solution development using Angular and ASP.NET Core following Agile practices.",
+      "Integrated Azure Service Bus, Data Factory, and Blob Storage with .NET 5 enabling message-driven communication and secure data ingestion.",
+      "Implemented SonarQube-driven automated code analysis, CI/CD validations, and technical debt monitoring to maintain high code quality."
+    ]
+  },
+  {
+    "company": "Trinity Mobility Pvt Ltd",
+    "role": "Software Engineer",
+    "duration": "Jan 2021 – Sep 2021",
+    "highlights": [
+      "Optimized SQL queries and database schema using indexing and execution plan analysis achieving major performance improvements.",
+      "Applied Clean Architecture and SOLID principles using Repository and Dependency Injection patterns for scalable enterprise systems."
+    ]
+  },
+  {
+    "company": "Keabis Tech Pvt Ltd",
+    "role": "Associate Software Engineer",
+    "duration": "Dec 2019 – Dec 2020",
+    "highlights": [
+      "Developed full-stack modules using .NET Core and Angular including reusable components and RESTful APIs.",
+      "Implemented database performance enhancements using stored procedures, Dapper, EF Core, indexing, and query tuning to reduce latency."
+    ]
+  }
+]

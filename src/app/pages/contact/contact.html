@@ -1,0 +1,67 @@
+<section class="px-4 py-16 bg-gradient-to-br from-slate-50 to-blue-50">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+
+    <!-- LEFT SVG (auto scales on all screens) -->
+    <div class="hidden md:flex justify-center animate-float">
+
+      <svg viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg"
+           class="w-56 sm:w-64 md:w-80 lg:w-96 envelope-svg">
+
+        <defs>
+          <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#60a5fa"/>
+            <stop offset="50%" stop-color="#8b5cf6"/>
+            <stop offset="100%" stop-color="#ec4899"/>
+          </linearGradient>
+        </defs>
+
+        <g fill="none" stroke="url(#grad)" stroke-width="6"
+           stroke-linecap="round" stroke-linejoin="round">
+          <rect x="80" y="120" width="440" height="260" rx="20"/>
+          <path d="M80 160l220 150L520 160"/>
+          <path d="M80 120l220 180L520 120"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- RIGHT FORM -->
+    <div class="form-box">
+
+      <h2 class="text-3xl font-bold text-slate-800 mb-6 text-center">
+        Contact <span class="text-blue-600">Me</span>
+      </h2>
+
+      <form #formRef="ngForm" (ngSubmit)="sendMessage()" class="space-y-5">
+
+        <!-- Names -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input class="form-input" type="text" name="first" [(ngModel)]="form.first"
+                 placeholder="First Name" required>
+          <input class="form-input" type="text" name="last" [(ngModel)]="form.last"
+                 placeholder="Last Name" required>
+        </div>
+
+        <!-- Email -->
+        <input class="form-input" type="email" name="email" [(ngModel)]="form.email"
+               placeholder="Your Email" required>
+
+        <!-- Message -->
+        <textarea class="form-input h-28 sm:h-32 resize-none"
+                  name="message" [(ngModel)]="form.message"
+                  placeholder="Your Message..." required></textarea>
+
+        <!-- Button -->
+        <button type="submit" class="send-btn" [disabled]="loading">
+          <span *ngIf="!loading">SEND MESSAGE</span>
+          <span *ngIf="loading">Sending...</span>
+        </button>
+
+        <p *ngIf="success" class="text-green-600 text-center success-text font-medium">
+          ✓ Your message has been sent!
+        </p>
+
+      </form>
+    </div>
+
+  </div>
+</section>

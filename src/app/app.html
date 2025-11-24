@@ -1,0 +1,184 @@
+<!-- NAVBAR -->
+<nav class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200 shadow-sm">
+  <div class="max-w-6xl mx-auto px-4">
+
+    <div class="flex justify-between items-center py-4">
+
+ <div class="flex items-center gap-2">
+
+  <!-- 3D Rotating Logo -->
+  <div class="logo-3d w-10 h-10 flex items-center justify-center">
+    <svg viewBox="0 0 100 100" class="w-10 h-10">
+      <defs>
+        <linearGradient id="grad3d" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#3b82f6" />
+          <stop offset="50%" stop-color="#8b5cf6" />
+          <stop offset="100%" stop-color="#ec4899" />
+        </linearGradient>
+      </defs>
+
+      <circle cx="50" cy="50" r="40" fill="url(#grad3d)" opacity="0.9"/>
+      <circle cx="50" cy="50" r="25" fill="white" opacity="0.12"/>
+      <circle cx="50" cy="50" r="12" fill="white" opacity="0.28"/>
+    </svg>
+  </div>
+
+  <!-- Existing Title -->
+  <a (click)="scrollTo('bio', $event)"
+     class="text-3xl font-extrabold cursor-pointer"
+     style="font-family: 'Poppins', sans-serif;">
+    <span class="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text">
+      Dev Portfolio
+    </span>
+  </a>
+
+</div>
+
+
+
+      <!-- MOBILE MENU BUTTON -->
+      <button class="md:hidden text-slate-800"
+              (click)="menuOpen = !menuOpen">
+        <svg *ngIf="!menuOpen" class="h-7 w-7" fill="none" stroke="currentColor">
+          <path stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+        <svg *ngIf="menuOpen" class="h-7 w-7" fill="none" stroke="currentColor">
+          <path stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <!-- DESKTOP MENU -->
+      <ul class="hidden md:flex gap-8 text-sm font-semibold">
+
+        <li>
+          <a (click)="scrollTo('bio', $event)"
+             class="cursor-pointer px-1 transition hover:text-blue-600"
+             [class.text-blue-600]="activeSection === 'bio'"
+             [class.border-b-2]="activeSection === 'bio'"
+             [class.border-blue-600]="activeSection === 'bio'">
+            ABOUT ME
+          </a>
+        </li>
+
+        <li>
+          <a (click)="scrollTo('tech', $event)"
+             class="cursor-pointer px-1 transition hover:text-blue-600"
+             [class.text-blue-600]="activeSection === 'tech'"
+             [class.border-b-2]="activeSection === 'tech'"
+             [class.border-blue-600]="activeSection === 'tech'">
+            TECH STACK
+          </a>
+        </li>
+
+        <li>
+          <a (click)="scrollTo('experience', $event)"
+             class="cursor-pointer px-1 transition hover:text-blue-600"
+             [class.text-blue-600]="activeSection === 'experience'"
+             [class.border-b-2]="activeSection === 'experience'"
+             [class.border-blue-600]="activeSection === 'experience'">
+            EXPERIENCE
+          </a>
+        </li>
+
+        <li>
+          <a (click)="scrollTo('certifications', $event)"
+             class="cursor-pointer px-1 transition hover:text-blue-600"
+             [class.text-blue-600]="activeSection === 'certifications'"
+             [class.border-b-2]="activeSection === 'certifications'"
+             [class.border-blue-600]="activeSection === 'certifications'">
+            CERTIFICATIONS
+          </a>
+        </li>
+
+        <li>
+          <a (click)="scrollTo('studies', $event)"
+             class="cursor-pointer px-1 transition hover:text-blue-600"
+             [class.text-blue-600]="activeSection === 'studies'"
+             [class.border-b-2]="activeSection === 'studies'"
+             [class.border-blue-600]="activeSection === 'studies'">
+            EDUCATION
+          </a>
+        </li>
+
+
+        <li>
+          <a (click)="scrollTo('contact', $event)"
+             class="cursor-pointer px-1 transition hover:text-blue-600"
+             [class.text-blue-600]="activeSection === 'contact'"
+             [class.border-b-2]="activeSection === 'contact'"
+             [class.border-blue-600]="activeSection === 'contact'">
+            CONTACT ME
+          </a>
+        </li>
+
+      </ul>
+
+    </div>
+
+
+    <!-- MOBILE MENU -->
+<ul *ngIf="menuOpen"
+    class="mobile-menu md:hidden flex flex-col gap-3">
+
+  <li><a (click)="scrollTo('bio',$event); menuOpen=false" class="mobile-item">ABOUT ME</a></li>
+  <li><a (click)="scrollTo('tech',$event); menuOpen=false" class="mobile-item">TECH STACK</a></li>
+  <li><a (click)="scrollTo('experience',$event); menuOpen=false" class="mobile-item">EXPERIENCE</a></li>
+  <li><a (click)="scrollTo('certifications',$event); menuOpen=false" class="mobile-item">CERTIFICATIONS</a></li>
+  <li><a (click)="scrollTo('studies',$event); menuOpen=false" class="mobile-item">EDUCATION</a></li>
+  <li><a (click)="scrollTo('contact',$event); menuOpen=false" class="mobile-item">CONTACT ME</a></li>
+
+</ul>
+
+
+  </div>
+</nav>
+
+
+<!-- SECTIONS -->
+<main class="w-full">
+
+  <!-- BIO -->
+  <section id="bio" class="py-16 px-5 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <app-bio></app-bio>
+    </div>
+  </section>
+
+  <!-- TECH -->
+  <section id="tech" class="py-16 px-5 bg-gray-50">
+    <div class="max-w-6xl mx-auto">
+      <app-tech></app-tech>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="py-16 px-5 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <app-experience></app-experience>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications" class="py-16 px-5 bg-gray-50">
+    <div class="max-w-6xl mx-auto">
+      <app-certifications></app-certifications>
+    </div>
+  </section>
+
+  <!-- STUDIES -->
+  <section id="studies" class="py-16 px-5 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <app-studies></app-studies>
+    </div>
+  </section>
+
+
+  <!-- CONTACT -->
+  <section id="contact" class="py-16 px-5 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <app-contact></app-contact>
+    </div>
+  </section>
+
+</main>
+

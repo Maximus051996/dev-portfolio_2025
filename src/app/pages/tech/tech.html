@@ -1,0 +1,33 @@
+<section class="py-16 px-6 bg-gray-50">
+  <div class="max-w-7xl mx-auto">
+
+    <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-12">
+      Tech <span class="text-blue-600">Stack Diagram</span>
+    </h2>
+
+    <!-- FULLY RESPONSIVE GRID -->
+    <div class="tech-grid">
+
+      <div class="category-block animate-fade"
+           *ngFor="let cat of keys(techData); let i = index">
+
+        <!-- Category node -->
+        <div class="category-node" [ngClass]="'color-' + i">
+          <div class="cat-icon">{{ icons[i] }}</div>
+          <div class="cat-title">{{ cat }}</div>
+        </div>
+
+        <!-- Vertical Line -->
+        <div class="v-line"></div>
+
+        <!-- Skills -->
+        <div class="skills-box">
+          <div class="skill-chip" *ngFor="let s of techData[cat]">{{ s }}</div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>

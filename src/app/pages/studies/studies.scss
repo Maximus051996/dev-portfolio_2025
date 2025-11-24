@@ -1,0 +1,115 @@
+.edu-wrapper {
+  background: #f8fafc;
+}
+
+/* Center Vertical Line */
+.center-line {
+  display: none !important;
+}
+
+
+/* Timeline item */
+.edu-item {
+  text-align: center;
+  --color1: #3b82f6;
+  --color2: #8b5cf6;
+  --color3: #10b981;
+
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.7s ease;
+  transition-delay: var(--delay);
+}
+
+.edu-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Year circle */
+.circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: white;
+  border: 3px solid #3b82f6;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+}
+
+.year {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1e3a8a;
+}
+
+/* Arrow bar */
+.arrow {
+  height: 12px;
+  width: 80%;
+  max-width: 200px;
+  background: #3b82f6;
+  margin: 12px auto 20px;
+  border-radius: 6px;
+  position: relative;
+}
+
+.arrow::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  transform: translateX(-50%);
+  border-width: 8px;
+  border-style: solid;
+  border-color: #3b82f6 transparent transparent transparent;
+}
+
+/* Education Card */
+.edu-card {
+  background: white;
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 6px;
+  }
+
+  .stream {
+    font-size: 0.9rem;
+    color: #4f46e5;
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+
+  .inst {
+    font-size: 0.85rem;
+    color: #64748b;
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .center-line {
+    display: none !important;
+  }
+}
+
+@media (max-width: 500px) {
+  .arrow {
+    width: 90%;
+  }
+
+  .circle {
+    width: 70px;
+    height: 70px;
+  }
+}

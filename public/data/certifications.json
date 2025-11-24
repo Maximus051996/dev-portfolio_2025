@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Azure AI Fundamentals",
+    "code": "AI-900",
+    "issuer": "Microsoft"
+  },
+  {
+    "name": "Azure Fundamentals",
+    "code": "AZ-900",
+    "issuer": "Microsoft"
+  },
+  {
+    "name": "Associate Cloud Engineer",
+    "code": "ACE",
+    "issuer": "Google Cloud"
+  },
+  {
+    "name": "AWS Cloud Practitioner",
+    "code": "CLF-C02",
+    "issuer": "Amazon Web Services"
+  }
+]

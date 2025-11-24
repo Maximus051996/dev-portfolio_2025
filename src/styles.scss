@@ -1,0 +1,20 @@
+@use "tailwindcss";
+
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Fix section shifting */
+}
+
+/* fade-in animation for sections */
+.section {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+

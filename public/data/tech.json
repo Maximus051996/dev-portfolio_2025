@@ -1,0 +1,7 @@
+{
+  "Backend": [ ".NET Core", "Python"],
+  "Frontend": ["Angular", "TypeScript", "JavaScript", "Tailwind CSS","Next JS"],
+  "Cloud": ["Azure", "AWS", "Azure DevOps"],
+  "Database": ["SQL Server", "MongoDB", "PostgreSQL"],
+  "Tools": ["Git", "GitHub", "Docker", "Postman", "Swagger"]
+}

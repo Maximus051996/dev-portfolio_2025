@@ -1,0 +1,20 @@
+[
+  {
+    "degree": "Bachelor of Technology (B.Tech)",
+    "stream": "Computer Science and Engineering",
+    "institute": "Guru Nanak Institute of Technology(GNIT), Kolkata",
+    "year": "2018"
+  },
+  {
+    "degree": "Higher Secondary (12th)",
+    "stream": "Science",
+    "institute": "Ranaghat Lalgopal High School",
+    "year": "2014"
+  },
+  {
+    "degree": "Secondary (10th)",
+    "stream": "General",
+    "institute": "Ranaghat Pal Choudhary High (H.S.) School",
+    "year": "2012"
+  }
+]

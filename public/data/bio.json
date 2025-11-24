@@ -1,0 +1,24 @@
+{
+  "fullName": "Sayan Pramanick",
+  "title": "Full Stack Developer (.NET | Angular | Azure)",
+  "summary": "Full Stack Developer with 5.8+ years of experience building secure, scalable, and cloud-native applications using .NET Core, Angular, Azure, SQL, and microservices. Specialized in high-performance APIs, distributed systems, clean architecture, and cloud deployments. Passionate about problem-solving, performance optimization, and delivering production-ready software.",
+
+  "avatar": "/images/profile.jpg",
+
+  "location": "Ranaghat, West Bengal",
+  "email": "sayanpra07@gmail.com",
+  "phone": "+91-8617334125",
+
+  "socials": [
+    {
+      "name": "GitHub",
+      "url": "https://github.com/Maximus051996",
+      "icon": "github"
+    },
+    {
+      "name": "LinkedIn",
+      "url": "https://linkedin.com/in/sayanpramanick07",
+      "icon": "linkedin"
+    }
+  ]
+}
