@@ -1,4 +1,44 @@
-/* Fade In */
+/* Availability Pill */
+.availability-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #111827;
+  color: white;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+
+/* Green Pulse Dot */
+.pulse-dot {
+  width: 10px;
+  height: 10px;
+  background: #22c55e;
+  border-radius: 50%;
+  position: relative;
+}
+
+.pulse-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(34,197,94,0.4);
+  animation: pulse 1.5s infinite;
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+  0%   { transform: scale(1); opacity: 1; }
+  70%  { transform: scale(2); opacity: 0; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+/* Fade + Slide Animations (unchanged from your previous code) */
 @keyframes fade-in {
   0% { opacity: 0; }
   100% { opacity: 1; }
@@ -7,7 +47,6 @@
   animation: fade-in 0.8s ease forwards;
 }
 
-/* Fade In Up */
 @keyframes fade-in-up {
   0% { opacity: 0; transform: translateY(20px); }
   100% { opacity: 1; transform: translateY(0); }
@@ -16,7 +55,6 @@
   animation: fade-in-up 0.9s ease both;
 }
 
-/* Slide In Right */
 @keyframes slide-in-right {
   0% { opacity: 0; transform: translateX(20px); }
   100% { opacity: 1; transform: translateX(0); }
@@ -25,8 +63,6 @@
   animation: slide-in-right 0.9s ease both;
 }
 
-/* Delay classes */
 .delay-200 { animation-delay: 0.2s; }
 .delay-300 { animation-delay: 0.3s; }
 .delay-500 { animation-delay: 0.5s; }
-.delay-700 { animation-delay: 0.7s; }
