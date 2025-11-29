@@ -5,24 +5,28 @@
       Tech <span class="text-blue-600">Stack Diagram</span>
     </h2>
 
-    <!-- FULLY RESPONSIVE GRID -->
     <div class="tech-grid">
 
       <div class="category-block animate-fade"
            *ngFor="let cat of keys(techData); let i = index">
 
-        <!-- Category node -->
+        <!-- TOP CIRCLE -->
         <div class="category-node" [ngClass]="'color-' + i">
-          <div class="cat-icon">{{ icons[i] }}</div>
+
+          <!-- FontAwesome Icon -->
+          <fa-icon [icon]="icons[i]" class="cat-icon"></fa-icon>
+
           <div class="cat-title">{{ cat }}</div>
         </div>
 
         <!-- Vertical Line -->
         <div class="v-line"></div>
 
-        <!-- Skills -->
+        <!-- Skills Chips -->
         <div class="skills-box">
-          <div class="skill-chip" *ngFor="let s of techData[cat]">{{ s }}</div>
+          <div class="skill-chip" *ngFor="let s of techData[cat]">
+            {{ s }}
+          </div>
         </div>
 
       </div>

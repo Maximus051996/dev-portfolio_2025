@@ -1,7 +1,7 @@
 {
   "fullName": "Sayan Pramanick",
   "title": "Full Stack Developer (.NET | Angular | Azure)",
-  "summary": "Full Stack Developer with 5.8+ years of experience building secure, scalable, and cloud-native applications using .NET Core, Angular, Azure, SQL, and microservices. Specialized in high-performance APIs, distributed systems, clean architecture, and cloud deployments. Passionate about problem-solving, performance optimization, and delivering production-ready software.",
+  "summary": "Full Stack Developer with 5.8+ years of experience building secure, scalable, and cloud-native applications using .NET Core, Angular, Azure, SQL, and microservices. I specialize in high-performance APIs, distributed systems, and clean architecture, and have a strong track record of delivering production-ready software in real-world environments. I enjoy solving complex problems, optimizing performance, and creating solutions that are reliable, maintainable, and designed to scale.",
 
   "avatar": "/images/profile.jpg",
 
@@ -19,6 +19,11 @@
       "name": "LinkedIn",
       "url": "https://linkedin.com/in/sayanpramanick07",
       "icon": "linkedin"
+    },
+    {
+      "name": "Instagram",
+      "url": "https://www.instagram.com/successhunter_liveincool?igsh=MXQ1Z3J0aGRzdDBkMA%3D%3D&utm_source=qr",
+      "icon": "instagram"
     }
   ]
 }

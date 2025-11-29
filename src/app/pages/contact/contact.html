@@ -1,12 +1,10 @@
 <section class="px-4 py-16 bg-gradient-to-br from-slate-50 to-blue-50">
   <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
-    <!-- LEFT SVG (auto scales on all screens) -->
+    <!-- LEFT SVG -->
     <div class="hidden md:flex justify-center animate-float">
-
       <svg viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg"
            class="w-56 sm:w-64 md:w-80 lg:w-96 envelope-svg">
-
         <defs>
           <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stop-color="#60a5fa"/>
@@ -26,10 +24,20 @@
 
     <!-- RIGHT FORM -->
     <div class="form-box">
-
-      <h2 class="text-3xl font-bold text-slate-800 mb-6 text-center">
+      <h2 class="text-3xl font-bold text-slate-800 mb-3 text-center">
         Contact <span class="text-blue-600">Me</span>
       </h2>
+
+      <!-- NEW INFO LINE -->
+     <p class="text-center text-slate-600 text-sm mb-6">
+  Please contact me directly at
+  <a href="mailto:sayanpra07@gmail.com"
+     class="text-blue-600 font-semibold underline hover:text-blue-700 transition">
+    sayanpra07@gmail.com
+  </a>
+  or through this form.
+</p>
+
 
       <form #formRef="ngForm" (ngSubmit)="sendMessage()" class="space-y-5">
 
@@ -50,10 +58,12 @@
                   name="message" [(ngModel)]="form.message"
                   placeholder="Your Message..." required></textarea>
 
-        <!-- Button -->
-        <button type="submit" class="send-btn" [disabled]="loading">
-          <span *ngIf="!loading">SEND MESSAGE</span>
-          <span *ngIf="loading">Sending...</span>
+        <!-- PREMIUM BUTTON -->
+        <button type="submit" class="premium-btn" [disabled]="loading">
+          <span class="btn-text" *ngIf="!loading">Send Message</span>
+          <span class="btn-text" *ngIf="loading">Sending...</span>
+
+          <span class="btn-arrow">→</span>
         </button>
 
         <p *ngIf="success" class="text-green-600 text-center success-text font-medium">

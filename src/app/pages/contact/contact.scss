@@ -1,103 +1,111 @@
 /* ============================
-   FLOAT ANIMATION (LIGHT)
+   FLOAT ANIMATION
 ============================ */
 @keyframes float {
   0% { transform: translateY(0px); }
   50% { transform: translateY(-12px); }
   100% { transform: translateY(0px); }
 }
-
-.animate-float {
-  animation: float 4.5s ease-in-out infinite;
-}
+.animate-float { animation: float 4.5s ease-in-out infinite; }
 
 /* ============================
-   LIGHT SVG GLOW
+   SVG GLOW
 ============================ */
 @keyframes glowPulse {
-  0%   { filter: drop-shadow(0 0 4px rgba(96,165,250,0.25)); }
-  50%  { filter: drop-shadow(0 0 10px rgba(139,92,246,0.35)); }
-  100% { filter: drop-shadow(0 0 4px rgba(236,72,153,0.25)); }
+  0%   { filter: drop-shadow(0 0 6px rgba(96,165,250,0.2)); }
+  50%  { filter: drop-shadow(0 0 14px rgba(139,92,246,0.35)); }
+  100% { filter: drop-shadow(0 0 6px rgba(236,72,153,0.2)); }
 }
-
-.envelope-svg {
-  animation: glowPulse 4s ease-in-out infinite;
-}
+.envelope-svg { animation: glowPulse 4s ease-in-out infinite; }
 
 /* ============================
-   GLASS BOX - CLEAN LOOK
+   GLASS BOX
 ============================ */
 .form-box {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
   padding: 2rem;
-  border-radius: 20px;
-  border: 1px solid #eef2ff;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  border-radius: 22px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.06);
 }
 
-/* Small screens fix */
 @media (max-width: 480px) {
-  .form-box {
-    padding: 1.3rem;
-    border-radius: 16px;
-  }
+  .form-box { padding: 1.3rem; border-radius: 16px; }
 }
 
 /* ============================
-   INPUTS - LIGHT & SIMPLE
+   INPUTS
 ============================ */
 .form-input {
   width: 100%;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: #f1f5f9;
+  border: 1px solid #d1d5db;
   padding: 12px 14px;
   border-radius: 10px;
   font-size: 1rem;
-  transition: .25s ease;
+  transition: 0.25s ease;
 }
 
 .form-input:focus {
   border-color: #60a5fa;
-  box-shadow: 0 0 6px rgba(96,165,250,0.25);
+  box-shadow: 0 0 8px rgba(96,165,250,0.35);
   background: white;
 }
 
 /* ============================
-   BUTTON - LIGHT GRADIENT
+   PREMIUM BUTTON
 ============================ */
-.send-btn {
+.premium-btn {
   width: 100%;
-  background: linear-gradient(to right, #60a5fa, #8b5cf6);
-  padding: 12px;
-  border-radius: 10px;
+  padding: 14px;
+  border-radius: 14px;
+  background: linear-gradient(90deg, #60a5fa, #8b5cf6, #ec4899);
   color: white;
   font-weight: 600;
-  transition: .25s ease;
+  font-size: 1.05rem;
   text-align: center;
-  font-size: 1rem;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
 
-.send-btn:hover {
-  filter: brightness(1.07);
+.premium-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  filter: brightness(1.08);
+  box-shadow: 0 10px 24px rgba(90, 90, 255, 0.25);
 }
 
-.send-btn:active {
-  transform: scale(0.98);
+.premium-btn:active {
+  transform: scale(0.97);
 }
 
-/* Disable */
+/* Sliding arrow animation */
+.btn-arrow {
+  transition: transform 0.3s ease;
+}
+
+.premium-btn:hover .btn-arrow {
+  transform: translateX(6px);
+}
+
+/* Disable state */
 button[disabled] {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-/* Success */
+/* Success text */
 .success-text {
   animation: fadeIn .6s ease-out;
 }
 
-/* Fade animation */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(5px); }
   to { opacity: 1; transform: translateY(0); }
