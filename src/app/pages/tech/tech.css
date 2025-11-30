@@ -1,92 +1,15 @@
-.tech-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 40px;
-  width: 100%;
+:host {
+  display: block;
+  animation: fadeIn .45s ease;
 }
 
-.category-block {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Circle Node */
-.category-node {
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-  background: white;
-  border: 3px solid;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-  transition: 0.3s ease;
-}
-
-.category-node:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
-}
-
-.cat-icon {
-  font-size: 2.2rem;
-  color: #1e293b;
-}
-
-.cat-title {
-  margin-top: 6px;
-  font-weight: 700;
-  font-size: 1rem;
-}
-
-/* Line */
-.v-line {
-  width: 3px;
-  height: 40px;
-  background: #d1d5db;
-  margin: 14px 0;
-}
-
-/* Skill Chips */
-.skills-box {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 9px;
-}
-
-.skill-chip {
-  background: white;
-  padding: 8px 14px;
-  border-radius: 10px;
-  border: 1px solid #e2e8f0;
-  font-size: 0.85rem;
-  transition: 0.25s ease;
-}
-
-.skill-chip:hover {
-  background: #e0f2fe;
-  transform: translateY(-3px);
-  border-color: #38bdf8;
-  color: #0369a1;
-}
-
-/* Colors */
-.color-0 { border-color: #3b82f6; }
-.color-1 { border-color: #10b981; }
-.color-2 { border-color: #a855f7; }
-.color-3 { border-color: #f59e0b; }
-.color-4 { border-color: #ef4444; }
-
-/* Animation */
-@keyframes fade {
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.animate-fade {
-  animation: fade 0.7s ease forwards;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

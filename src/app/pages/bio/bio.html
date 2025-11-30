@@ -1,26 +1,25 @@
 <section class="p-6 bg-white">
   <div
     *ngIf="bio$ | async as bio"
-    class="flex flex-col md:flex-row items-center gap-6 animate-fade-in-up"
+    class="flex flex-col md:flex-row items-center gap-8 animate-fade-in-up"
   >
 
     <!-- Profile Image -->
     <img
       [src]="bio.avatar"
       alt="Profile"
-      class="w-32 h-32 md:w-55 md:h-55 rounded-full object-cover shadow-lg
-             transform transition duration-300 hover:scale-105"
+      class="avatar-img"
     />
 
     <!-- Text Section -->
     <div class="text-center md:text-left animate-slide-in-right w-full">
 
-      <!-- NAME (Uppercase, bold, premium font) -->
-      <h1 class="text-4xl tracking-wide opacity-0 animate-fade-in delay-200">
+      <!-- NAME -->
+      <h1 class="bio-name opacity-0 animate-fade-in delay-200">
         {{ bio.fullName }}
       </h1>
 
-      <!-- Availability Pill -->
+      <!-- Availability -->
       <div class="mt-3 flex justify-center md:justify-start">
         <div class="availability-pill">
           <span class="pulse-dot"></span>
@@ -29,12 +28,12 @@
       </div>
 
       <!-- Title -->
-      <p class="text-lg text-gray-600 mt-3 opacity-0 animate-fade-in delay-300">
+      <p class="bio-title opacity-0 animate-fade-in delay-300">
         {{ bio.title }}
       </p>
 
       <!-- Summary -->
-      <p class="mt-3 text-gray-700 opacity-0 animate-fade-in delay-500 leading-relaxed">
+      <p class="bio-summary opacity-0 animate-fade-in delay-500">
         {{ bio.summary }}
       </p>
 
@@ -45,10 +44,7 @@
           [href]="s.url"
           target="_blank"
           rel="noopener noreferrer"
-          class="w-10 h-10 flex items-center justify-center
-                 rounded-full border border-gray-600
-                 text-gray-800 hover:text-white hover:bg-gray-800
-                 transition-all duration-300 transform hover:scale-110"
+          class="social-icon"
           [attr.aria-label]="s.name"
         >
           <fa-icon [icon]="iconMap[s.icon!]" class="text-xl"></fa-icon>
@@ -59,29 +55,17 @@
       <div class="mt-6 flex flex-col sm:flex-row justify-center md:justify-start gap-4">
         <button
           (click)="scrollToContact()"
-          class="group inline-flex items-center gap-2
-                 px-6 py-3 rounded-full
-                 bg-white text-slate-900
-                 border border-slate-300
-                 shadow-md hover:bg-slate-900 hover:text-white
-                 transition-all duration-300 active:scale-95"
+          class="btn-outline"
         >
-          <span class="font-medium">Get in touch</span>
-          <span class="text-xl transition-transform duration-300 group-hover:translate-x-1">
-            →
-          </span>
+          <span>Get in touch</span>
+          <span class="arrow">→</span>
         </button>
 
         <a
           href="/resume/Resume_Sayan_Pramanick.pdf"
           target="_blank"
           rel="noreferrer"
-          class="inline-flex items-center gap-2
-                 px-5 py-3 rounded-full font-semibold text-white
-                 bg-gradient-to-r from-blue-600 to-indigo-600
-                 shadow-lg shadow-blue-500/30
-                 hover:from-blue-700 hover:to-indigo-700
-                 transition-all duration-300 active:scale-95"
+          class="btn-gradient"
         >
           <svg xmlns="http://www.w3.org/2000/svg"
                fill="none" viewBox="0 0 24 24"

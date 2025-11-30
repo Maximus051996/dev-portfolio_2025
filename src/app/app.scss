@@ -125,11 +125,11 @@ nav a:hover::after {
 .brand-title {
   font-family: 'Poppins', sans-serif;
   font-weight: 800;
-  font-size: clamp(22px, 5vw, 42px); /* auto-resizes */
+  font-size: clamp(26px, 5.4vw, 46px); /* auto-resizes */
   margin-left: .5rem;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   white-space: nowrap;
   animation: floatBrand 4s ease-in-out infinite;
 }
@@ -142,6 +142,7 @@ nav a:hover::after {
 
 @media (max-width: 500px) {
   .brand-title {
+    font-size: clamp(22px, 6vw, 30px);
     animation: none;      /* prevent layout jump on tiny screens */
     transform: translateY(0);
   }
@@ -237,4 +238,6 @@ nav a:hover::after {
     transform: rotateX(0deg) rotateY(0deg) rotateZ(360deg) scale(1);
   }
 }
+
+
 

@@ -1,7 +1,7 @@
 export interface TechItem {
-  coreSkills: string[];
-  frontend: string[];
-  cloudDevops: string[];
-  databases: string[];
-  tools: string[];
+  Backend: string[];
+  Frontend: string[];
+  Cloud: string[];
+  Database: string[];
+  Tools: string[]
 }

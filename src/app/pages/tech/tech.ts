@@ -1,39 +1,32 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { TechItem } from '../../core/models/tech.model';
 import { DataService } from '../../core/services/data.service';
-import { AsyncPipe, CommonModule } from '@angular/common';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {
-  faServer,
-  faDatabase,
-  faBolt,
-  faCloud
-} from '@fortawesome/free-solid-svg-icons';
-import {
-  faAngular
-} from '@fortawesome/free-brands-svg-icons';
+
+type CategoryKey = keyof TechItem;
+
 @Component({
   selector: 'app-tech',
   standalone: true,
-  imports: [CommonModule, AsyncPipe,FontAwesomeModule],
+  imports: [CommonModule],
   templateUrl: './tech.html',
-  styleUrl: './tech.css',
+  styleUrls: ['./tech.css']
 })
 export class Tech implements OnInit {
+  tech$!: Observable<TechItem>;
 
-  techData: any = {};
-
-  icons = [ faServer,
-  faAngular,faCloud,
-  faDatabase,
-  faBolt];
+  categories: { label: string; key: CategoryKey; color: string }[] = [
+    { label: 'Frontend', key: 'Frontend', color: 'from-emerald-400 to-green-600' },
+    { label: 'Backend', key: 'Backend', color: 'from-amber-400 to-orange-600' },
+    { label: 'Cloud', key: 'Cloud', color: 'from-violet-500 to-purple-700' },
+    { label: 'Database', key: 'Database', color: 'from-sky-500 to-blue-700' },
+    { label: 'Tools', key: 'Tools', color: 'from-gray-500 to-gray-700' },
+  ];
 
   constructor(private ds: DataService) {}
 
-  ngOnInit() {
-    this.ds.getTech().subscribe(res => this.techData = res);
-  }
-
-  keys(obj: any) {
-    return Object.keys(obj);
+  ngOnInit(): void {
+    this.tech$ = this.ds.getTech();
   }
 }

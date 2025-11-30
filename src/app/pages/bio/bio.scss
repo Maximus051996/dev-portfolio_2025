@@ -1,68 +1,148 @@
+/* Avatar Image */
+.avatar-img {
+  width: clamp(120px, 22vw, 220px);
+  height: clamp(120px, 22vw, 220px);
+  border-radius: 9999px;
+  object-fit: cover;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  transition: transform .3s ease;
+}
+.avatar-img:hover {
+  transform: scale(1.04);
+}
+
+/* Name */
+.bio-name {
+  font-weight: 800;
+  font-size: clamp(24px, 4vw, 40px);
+  letter-spacing: .5px;
+  color: #111827;
+}
+
+/* Title */
+.bio-title {
+  font-size: clamp(15px, 2vw, 20px);
+  color: #6b7280;
+  margin-top: 6px;
+}
+
+/* Summary */
+.bio-summary {
+  margin-top: 14px;
+  color: #374151;
+  line-height: 1.6;
+  font-size: clamp(14px, 2vw, 18px);
+}
+
+/* Social Icons */
+.social-icon {
+  width: clamp(36px, 3vw, 48px);
+  height: clamp(36px, 3vw, 48px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 9999px;
+  border: 1px solid #4b5563;
+  transition: .3s ease;
+}
+.social-icon:hover {
+  background: #111827;
+  color: white;
+  transform: scale(1.12);
+}
+
+/* Buttons */
+.btn-outline,
+.btn-gradient {
+  padding: clamp(10px, 1.4vw, 14px) clamp(16px, 2vw, 26px);
+  border-radius: 9999px;
+  font-size: clamp(14px, 1.5vw, 16px);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: .3s ease;
+}
+
+/* Outline Button */
+.btn-outline {
+  background: white;
+  border: 1px solid #d1d5db;
+  color: #111827;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+}
+.btn-outline:hover {
+  background: #111827;
+  color: white;
+}
+
+/* Down Arrow movement */
+.arrow {
+  font-size: clamp(16px, 2vw, 20px);
+  transition: transform .3s ease;
+}
+.btn-outline:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* Gradient Button */
+.btn-gradient {
+  background: linear-gradient(to right, #3b82f6, #6366f1);
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 4px 16px rgba(59,130,246,.25);
+}
+.btn-gradient:hover {
+  filter: brightness(1.15);
+}
+
 /* Availability Pill */
 .availability-pill {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #111827;
-  color: white;
   padding: 6px 16px;
+  background: #0f172a;
+  color: white;
   border-radius: 9999px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  font-size: clamp(12px, 1.5vw, 14px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-
-/* Green Pulse Dot */
+/* Pulse Dot */
 .pulse-dot {
-  width: 10px;
-  height: 10px;
-  background: #22c55e;
+  width: clamp(10px, 2vw, 12px);
+  height: clamp(10px, 2vw, 12px);
   border-radius: 50%;
+  background: #22c55e;
   position: relative;
 }
-
 .pulse-dot::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: rgba(34,197,94,0.4);
-  animation: pulse 1.5s infinite;
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background:rgba(34,197,94,0.4);
+  animation:pulse 1.5s infinite;
 }
 
-/* Pulse Animation */
 @keyframes pulse {
-  0%   { transform: scale(1); opacity: 1; }
-  70%  { transform: scale(2); opacity: 0; }
-  100% { transform: scale(1); opacity: 0; }
+  0% { transform:scale(1); opacity:1; }
+  70% { transform:scale(2); opacity:0; }
+  100% { transform:scale(1); opacity:0; }
 }
 
-/* Fade + Slide Animations (unchanged from your previous code) */
-@keyframes fade-in {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
-.animate-fade-in {
-  animation: fade-in 0.8s ease forwards;
-}
+/* Animations (unchanged) */
+.animate-fade-in { animation: fade-in .8s ease forwards; }
+@keyframes fade-in { 0%{opacity:0} 100%{opacity:1} }
 
+.animate-fade-in-up { animation: fade-in-up .9s ease both; }
 @keyframes fade-in-up {
-  0% { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-.animate-fade-in-up {
-  animation: fade-in-up 0.9s ease both;
+  0%{opacity:0; transform:translateY(20px)}
+  100%{opacity:1; transform:translateY(0)}
 }
 
+.animate-slide-in-right { animation: slide-in-right .9s ease both; }
 @keyframes slide-in-right {
-  0% { opacity: 0; transform: translateX(20px); }
-  100% { opacity: 1; transform: translateX(0); }
+  0%{opacity:0; transform:translateX(20px)}
+  100%{opacity:1; transform:translateX(0)}
 }
-.animate-slide-in-right {
-  animation: slide-in-right 0.9s ease both;
-}
-
-.delay-200 { animation-delay: 0.2s; }
-.delay-300 { animation-delay: 0.3s; }
-.delay-500 { animation-delay: 0.5s; }

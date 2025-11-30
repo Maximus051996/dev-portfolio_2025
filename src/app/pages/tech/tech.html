@@ -1,37 +1,69 @@
-<section class="py-16 px-6 bg-gray-50">
-  <div class="max-w-7xl mx-auto">
+<div class="flex flex-col items-center w-full py-12 space-y-10" *ngIf="tech$ | async as tech">
 
-    <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-12">
-      Tech <span class="text-blue-600">Stack Diagram</span>
-    </h2>
+  <!-- Title -->
+  <h2 class="font-extrabold text-gray-800 text-center"
+      style="font-size: clamp(24px, 4vw, 40px);">
+    Enterprise Tech Stack
+  </h2>
 
-    <div class="tech-grid">
+  <!-- Application Platform -->
+  <div class="relative flex flex-col items-center">
+    <div
+      class="rounded-full font-semibold text-white shadow-xl backdrop-blur-xl
+             bg-gradient-to-r from-blue-500 to-blue-700"
+      style="
+        padding: clamp(10px, 1.4vw, 14px) clamp(18px, 3vw, 40px);
+        font-size: clamp(14px, 2vw, 18px);
+      ">
+      Application Platform
+    </div>
 
-      <div class="category-block animate-fade"
-           *ngFor="let cat of keys(techData); let i = index">
+    <div class="bg-blue-400"
+         style="width:2px;height: clamp(42px, 7vw, 80px);margin-top:6px;">
+    </div>
+  </div>
 
-        <!-- TOP CIRCLE -->
-        <div class="category-node" [ngClass]="'color-' + i">
+  <!-- Connector line -->
+  <div class="w-full flex justify-center">
+    <div class="bg-gradient-to-r from-emerald-400 via-purple-500 to-blue-500"
+         style="width: clamp(260px, 60vw, 1000px); height: 2px;">
+    </div>
+  </div>
 
-          <!-- FontAwesome Icon -->
-          <fa-icon [icon]="icons[i]" class="cat-icon"></fa-icon>
+  <!-- Categories & Chips -->
+  <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-10 mt-6 w-full max-w-6xl">
 
-          <div class="cat-title">{{ cat }}</div>
-        </div>
+    <div class="flex flex-col items-center gap-4"
+         *ngFor="let c of categories">
 
-        <!-- Vertical Line -->
-        <div class="v-line"></div>
+      <div class="bg-gray-300"
+           style="width:2px;height: clamp(18px, 4vw, 36px);"></div>
 
-        <!-- Skills Chips -->
-        <div class="skills-box">
-          <div class="skill-chip" *ngFor="let s of techData[cat]">
-            {{ s }}
-          </div>
-        </div>
+      <!-- Category badge -->
+      <div
+        class="rounded-full font-semibold text-white shadow-lg
+               bg-gradient-to-r {{c.color}} backdrop-blur-xl"
+        style="
+          padding: clamp(6px,1.2vw,10px) clamp(16px,2vw,26px);
+          font-size: clamp(12px,1.6vw,16px);
+        ">
+        {{ c.label }}
+      </div>
 
+      <!-- Stack chips -->
+      <div class="flex flex-wrap justify-center gap-3">
+        <span
+          *ngFor="let item of tech[c.key]"
+          class="rounded-full shadow-sm bg-white text-gray-700 border border-gray-200 cursor-pointer
+                 hover:bg-gray-900 hover:text-white hover:shadow-md transition-all"
+          style="
+            padding: clamp(6px, 1vw, 10px) clamp(14px, 2vw, 22px);
+            font-size: clamp(12px, 1.4vw, 15px);
+          ">
+          {{ item }}
+        </span>
       </div>
 
     </div>
-
   </div>
-</section>
+</div>
