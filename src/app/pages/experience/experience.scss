@@ -1,84 +1,134 @@
-/* ================================
-   TIMELINE VISUAL STYLE
-================================ */
+/* =====================================
+   GLOBAL RESPONSIVE RULES
+   — clamp() typography
+   — smooth scaling
+===================================== */
 
+/* Title */
+.exp-title {
+  font-size: clamp(22px, 4vw, 42px);
+  font-weight: 800;
+  letter-spacing: .4px;
+  line-height: 1.2;
+}
+
+/* section container */
 .timeline-container {
   position: relative;
-  padding-bottom: 60px;
+  padding-bottom: clamp(40px, 6vw, 90px);
 }
 
-/* Fade-up animation */
+/* fade-up animation per item */
 .timeline-item {
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition: opacity .7s ease, transform .7s ease;
 }
-
 .timeline-item.visible {
   opacity: 1 !important;
   transform: translateY(0) !important;
 }
 
-/* ================================
-   LEFT DATE CARD – Neomorphic Style
-================================ */
+/* =====================================
+   LEFT DATE CARD (Neomorphic)
+===================================== */
 
 .date-card {
-  background: #ffffff;
-  padding: 20px 26px;
-  border-radius: 18px;
+  background: linear-gradient(145deg, #fff, #f5f7fa);
+  padding: clamp(12px, 1.6vw, 24px) clamp(18px, 2vw, 32px);
+  border-radius: clamp(12px, 2vw, 20px);
   border: 1px solid #e5e7eb;
-
+  min-width: clamp(90px, 10vw, 120px);
   text-align: center;
-  min-width: 120px;
-
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.shadow-date {
+  transition: .3s ease;
   box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.06),
-    0 1px 3px rgba(0, 0, 0, 0.04);
+    0 6px 12px rgba(0, 0, 0, 0.06),
+    0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 .timeline-item:hover .date-card {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
   box-shadow:
-    0 10px 26px rgba(0, 0, 0, 0.10),
-    0 2px 10px rgba(0, 0, 0, 0.04);
+    0 12px 28px rgba(0,0,0,0.14),
+    0 4px 10px rgba(0,0,0,0.06);
 }
 
-/* ================================
-   RIGHT CARD – Premium Smooth Design
-================================ */
+/* month + year fonts */
+.date-card .month {
+  color: #6b7280;
+  font-size: clamp(12px,1.4vw,14px);
+}
+.date-card .year {
+  font-weight: 800;
+  color: #111827;
+  font-size: clamp(24px,3vw,34px);
+}
+
+/* =====================================
+   EXPERIENCE CARD
+===================================== */
 
 .exp-card {
-  background: #ffffff;
-  border-radius: 20px;
-  border: 1px solid #eaecef;
-  padding: 26px;
   width: 100%;
-
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
-
-.shadow-exp {
+  background: #ffffff;
+  border: 1px solid #eceef0;
+  border-radius: clamp(14px,2vw,24px);
+  padding: clamp(18px,2vw,34px);
+  transition: .35s ease;
   box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.05),
-    0 10px 20px rgba(0, 0, 0, 0.04);
+    0 4px 10px rgba(0,0,0,0.05),
+    0 8px 18px rgba(0,0,0,0.03);
 }
 
+/* hover elevation */
 .timeline-item:hover .exp-card {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
   box-shadow:
-    0 16px 32px rgba(0, 0, 0, 0.12),
-    0 6px 12px rgba(0, 0, 0, 0.05);
+    0 14px 30px rgba(0,0,0,0.14),
+    0 6px 14px rgba(0,0,0,0.04);
 }
 
-/* ================================
-   RESPONSIVE FIX
-================================ */
+/* heading typography */
+.exp-card .company {
+  font-size: clamp(16px,2.2vw,22px);
+  font-weight: 700;
+  color: #1e293b;
+}
+.exp-card .role {
+  font-size: clamp(12px,1.6vw,14px);
+  color: #2563eb;
+}
 
+/* duration */
+.exp-card .duration {
+  font-size: clamp(12px,1.5vw,14px);
+  color: #9ca3af;
+}
+
+/* highlight bullet */
+.exp-card li {
+  font-size: clamp(12px,1.4vw,15px);
+  line-height: 1.6;
+  color: #374151;
+}
+
+/* =====================================
+   CENTER TIMELINE LINE
+===================================== */
+
+.timeline-center-line {
+  width: 3px;
+  background: linear-gradient(#d1d5db, #cbd5e1);
+}
+
+/* hide line on mobile */
 @media (max-width: 768px) {
-  .timeline-container div.absolute {
+  .timeline-center-line {
     display: none;
   }
+}
+
+/* =====================================
+   MOBILE friendly gap
+===================================== */
+ul {
+  gap: clamp(30px, 4vw, 60px);
 }

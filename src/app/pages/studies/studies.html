@@ -1,30 +1,32 @@
 <section class="edu-wrapper px-4 md:px-10 py-16">
   <div class="max-w-6xl mx-auto text-center">
-    <h2 class="text-3xl md:text-4xl font-extrabold mb-12">
+
+    <h2 class="edu-title mb-12">
       Education <span class="text-blue-600">Timeline</span>
     </h2>
 
     <div class="timeline relative">
-
-      <!-- Center Line -->
-
-
       <div class="grid md:grid-cols-3 gap-10">
 
-        <div *ngFor="let e of (education | async); let i = index"
-             #eduItem
-             class="edu-item opacity-0 transform translate-y-8">
+        <div
+          *ngFor="let e of (education | async); let i = index"
+          #eduItem
+          class="edu-item opacity-0 translate-y-8"
+        >
 
-          <div class="circle">
+          <!-- Year Circle -->
+          <div class="circle shadow-circle">
             <div class="year">{{ e.year }}</div>
           </div>
 
+          <!-- Arrow -->
           <div class="arrow"></div>
 
-          <div class="edu-card shadow-lg">
-            <h3>{{ e.degree }}</h3>
-            <p class="stream">{{ e.stream }}</p>
-            <p class="inst">{{ e.institute }}</p>
+          <!-- Card -->
+          <div class="edu-card shadow-card">
+            <h3 class="edu-degree">{{ e.degree }}</h3>
+            <p class="edu-stream">{{ e.stream }}</p>
+            <p class="edu-inst">{{ e.institute }}</p>
           </div>
         </div>
 

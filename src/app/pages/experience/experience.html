@@ -1,46 +1,40 @@
 <div class="max-w-6xl mx-auto px-4">
 
   <div class="flex flex-col sm:flex-row items-center justify-between mb-12">
-    <h2 class="text-3xl sm:text-4xl font-extrabold text-center sm:text-left">
+    <h2 class="exp-title text-center sm:text-left">
       Experience <span class="text-blue-600">Timeline</span>
     </h2>
-
-
-
   </div>
 
   <div *ngIf="experience$ | async as exp" class="relative timeline-container">
 
-    <!-- vertical center guide -->
-    <div class="absolute inset-y-0 left-1/2 w-[3px] bg-slate-200 hidden md:block"></div>
+    <!-- Timeline vertical guide -->
+    <div class="absolute inset-y-0 left-1/2 timeline-center-line hidden md:block"></div>
 
-    <ul class="space-y-20">
-      <li *ngFor="let item of exp; let i = index" #timelineItem
-          class="timeline-item flex flex-col md:flex-row items-center md:items-start gap-8 opacity-0 translate-y-6">
+    <ul class="flex flex-col space-y-16">
+      <li
+        *ngFor="let item of exp; let i = index"
+        #timelineItem
+        class="timeline-item flex flex-col md:flex-row items-center md:items-start gap-8 opacity-0 translate-y-6">
 
-        <!-- LEFT DATE BLOCK -->
-        <div class="date-card shadow-date">
-          <div class="text-slate-500 text-sm">
-            {{ extractMonth(item.duration) }}
-          </div>
-          <div class="text-3xl font-extrabold text-slate-900 tracking-tight">
-            {{ extractYear(item.duration) }}
-          </div>
+        <!-- LEFT DATE -->
+        <div class="date-card">
+          <div class="month">{{ extractMonth(item.duration) }}</div>
+          <div class="year">{{ extractYear(item.duration) }}</div>
         </div>
 
-        <!-- RIGHT CONTENT CARD -->
-        <article class="exp-card shadow-exp">
-          <div class="text-xl font-semibold text-slate-900">{{ item.company }}</div>
-          <div class="text-blue-600 text-sm font-medium">{{ item.role }}</div>
-          <div class="text-slate-400 mt-1 text-sm">{{ item.duration }}</div>
+        <!-- RIGHT CARD -->
+        <article class="exp-card">
+          <div class="company">{{ item.company }}</div>
+          <div class="role">{{ item.role }}</div>
+          <div class="duration mt-1">{{ item.duration }}</div>
 
           <ul class="mt-4 space-y-2">
-            <li *ngFor="let h of item.highlights" class="text-slate-600 text-sm leading-relaxed">
+            <li *ngFor="let h of item.highlights">
               • {{ h }}
             </li>
           </ul>
         </article>
-
       </li>
     </ul>
 

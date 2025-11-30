@@ -13,3 +13,11 @@
     transform: translateY(0);
   }
 }
+.tech-title-gradient {
+  font-size: clamp(24px, 4vw, 40px);
+  font-weight: 800;
+  letter-spacing: .4px;
+  background: linear-gradient(90deg,#1464ff,#9333ea,#06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

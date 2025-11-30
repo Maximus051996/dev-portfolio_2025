@@ -35,14 +35,14 @@ export class DataService {
     return this.http.get<EducationItem[]>(`${this.base}/education.json`);
   }
 
+
   sendEmail(payload: {
-    first: string;
-    last: string;
+    name: string;
     email: string;
     message: string;
   }) {
     const templateParams = {
-      name: `${payload.first} ${payload.last}`,
+      name: `${payload.name}`,
       from_email: payload.email,
       message: payload.message,
     };

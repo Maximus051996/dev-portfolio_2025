@@ -1,7 +1,7 @@
 <section class="px-4 md:px-10 py-16 bg-gray-50">
   <div class="max-w-6xl mx-auto">
 
-    <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-12">
+    <h2 class="cert-title text-center mb-12">
       Certifications <span class="text-blue-600">Achieved</span>
     </h2>
 
@@ -10,7 +10,7 @@
 
       <div *ngFor="let c of certs; let i = index"
            #certCard
-           class="cert-card opacity-0 transform scale-95">
+           class="cert-card opacity-0 scale-95">
 
         <div class="icon-circle">
           <svg xmlns="http://www.w3.org/2000/svg"
@@ -18,7 +18,7 @@
                stroke-width="1.5"
                stroke="currentColor"
                fill="none"
-               class="w-7 h-7 text-indigo-600">
+               class="icon-svg">
             <path stroke-linecap="round" stroke-linejoin="round"
                   d="M15.59 14.37L12 16.25l-3.59-1.88a1 1 0 00-1.41.94v2.62a1 1 0 00.55.89l3.45 1.73a1 1 0 00.9 0l3.45-1.73a1 1 0 00.55-.89v-2.62a1 1 0 00-1.41-.94z" />
             <path stroke-linecap="round" stroke-linejoin="round"
@@ -26,15 +26,15 @@
           </svg>
         </div>
 
-        <h3 class="text-lg font-semibold text-slate-900 mt-4 text-center">
+        <h3 class="cert-name text-center">
           {{ c.name }}
         </h3>
 
-        <p class="text-sm text-slate-500 mt-1 text-center">
-          Code: <span class="font-medium text-slate-700">{{ c.code }}</span>
+        <p class="cert-code text-center">
+          Code: <span>{{ c.code }}</span>
         </p>
 
-        <p class="text-sm text-blue-600 text-center mt-1">
+        <p class="cert-issuer text-center">
           {{ c.issuer }}
         </p>
 

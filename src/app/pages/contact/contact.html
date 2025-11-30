@@ -1,77 +1,79 @@
-<section class="px-4 py-16 bg-gradient-to-br from-slate-50 to-blue-50">
-  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+<section class="contact-ui px-6 py-16" id="contact">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
 
-    <!-- LEFT SVG -->
-    <div class="hidden md:flex justify-center animate-float">
-      <svg viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg"
-           class="w-56 sm:w-64 md:w-80 lg:w-96 envelope-svg">
-        <defs>
-          <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#60a5fa"/>
-            <stop offset="50%" stop-color="#8b5cf6"/>
-            <stop offset="100%" stop-color="#ec4899"/>
-          </linearGradient>
-        </defs>
-
-        <g fill="none" stroke="url(#grad)" stroke-width="6"
-           stroke-linecap="round" stroke-linejoin="round">
-          <rect x="80" y="120" width="440" height="260" rx="20"/>
-          <path d="M80 160l220 150L520 160"/>
-          <path d="M80 120l220 180L520 120"/>
-        </g>
-      </svg>
-    </div>
-
-    <!-- RIGHT FORM -->
-    <div class="form-box">
-      <h2 class="text-3xl font-bold text-slate-800 mb-3 text-center">
-        Contact <span class="text-blue-600">Me</span>
-      </h2>
-
-      <!-- NEW INFO LINE -->
-     <p class="text-center text-slate-600 text-sm mb-6">
-  Please contact me directly at
-  <a href="mailto:sayanpra07@gmail.com"
-     class="text-blue-600 font-semibold underline hover:text-blue-700 transition">
-    sayanpra07@gmail.com
-  </a>
-  or through this form.
-</p>
-
-
-      <form #formRef="ngForm" (ngSubmit)="sendMessage()" class="space-y-5">
-
-        <!-- Names -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input class="form-input" type="text" name="first" [(ngModel)]="form.first"
-                 placeholder="First Name" required>
-          <input class="form-input" type="text" name="last" [(ngModel)]="form.last"
-                 placeholder="Last Name" required>
+    <!-- LEFT SIDE -->
+    <div class="hero-left text-center md:text-left">
+      <div class="mailbox-wrapper">
+        <div class="mail-logo-premium">
+          <fa-icon [icon]="faEnvelope" class="premium-envelope"></fa-icon>
         </div>
 
-        <!-- Email -->
-        <input class="form-input" type="email" name="email" [(ngModel)]="form.email"
-               placeholder="Your Email" required>
+        <div class="ribbon ribbon-1"></div>
+        <div class="ribbon ribbon-2"></div>
+        <div class="ribbon ribbon-3"></div>
+      </div>
 
-        <!-- Message -->
-        <textarea class="form-input h-28 sm:h-32 resize-none"
-                  name="message" [(ngModel)]="form.message"
-                  placeholder="Your Message..." required></textarea>
-
-        <!-- PREMIUM BUTTON -->
-        <button type="submit" class="premium-btn" [disabled]="loading">
-          <span class="btn-text" *ngIf="!loading">Send Message</span>
-          <span class="btn-text" *ngIf="loading">Sending...</span>
-
-          <span class="btn-arrow">→</span>
-        </button>
-
-        <p *ngIf="success" class="text-green-600 text-center success-text font-medium">
-          ✓ Your message has been sent!
-        </p>
-
-      </form>
+      <h1 class="hero-title mt-6">Let’s &lt;Talk&gt;</h1>
+      <p class="hero-subtext">I'm always open to new opportunities and collaborations.</p>
     </div>
+
+    <!-- FORM (TEMPLATE DRIVEN) -->
+    <form #formRef="ngForm" (ngSubmit)="sendMessage(formRef)" class="form-card space-y-5">
+      <h3 class="form-title">
+        Get In  <span class="grad-highlight">Touch</span>
+      </h3>
+
+      <p class="email-line">
+        Please contact me directly at
+        <a href="mailto:sayanpra07@gmail.com"
+     class="text-blue-600 font-semibold underline hover:text-blue-700 transition">
+     <span class="mail-high">sayanpra07@gmail.com</span>
+  </a>
+         or through this form.
+      </p>
+
+      <input
+        class="input-box"
+        type="text"
+        name="name"
+        [(ngModel)]="form.name"
+        placeholder="Name"
+        required
+      />
+
+      <input
+        class="input-box"
+        type="email"
+        name="email"
+        [(ngModel)]="form.email"
+        placeholder="Email"
+        required
+        email
+      />
+
+      <textarea
+        class="input-box h-28 resize-none"
+        name="message"
+        [(ngModel)]="form.message"
+        placeholder="Message..."
+        required
+        minlength="5"
+      ></textarea>
+
+      <button
+        type="submit"
+        class="send-btn"
+        [disabled]="loading || !formRef.valid"
+      >
+        <span *ngIf="!loading">Send Message</span>
+        <span *ngIf="loading">Sending...</span>
+        <span class="send-icon">✈️</span>
+      </button>
+
+      <p *ngIf="success" class="success-msg">
+        ✓ Message Sent Successfully 🎉
+      </p>
+    </form>
 
   </div>
 </section>

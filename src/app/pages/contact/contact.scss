@@ -1,112 +1,263 @@
-/* ============================
-   FLOAT ANIMATION
-============================ */
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
-  100% { transform: translateY(0px); }
-}
-.animate-float { animation: float 4.5s ease-in-out infinite; }
-
-/* ============================
-   SVG GLOW
-============================ */
-@keyframes glowPulse {
-  0%   { filter: drop-shadow(0 0 6px rgba(96,165,250,0.2)); }
-  50%  { filter: drop-shadow(0 0 14px rgba(139,92,246,0.35)); }
-  100% { filter: drop-shadow(0 0 6px rgba(236,72,153,0.2)); }
-}
-.envelope-svg { animation: glowPulse 4s ease-in-out infinite; }
-
-/* ============================
-   GLASS BOX
-============================ */
-.form-box {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(16px);
-  padding: 2rem;
-  border-radius: 22px;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+/* ===============================
+   CONTACT SECTION
+=============================== */
+.contact-ui {
+  background: #ffffff;
+  scroll-margin-top: 90px;
+  padding-bottom: 80px;
 }
 
-@media (max-width: 480px) {
-  .form-box { padding: 1.3rem; border-radius: 16px; }
+/* ===============================
+   LEFT PANEL
+=============================== */
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* ============================
-   INPUTS
-============================ */
-.form-input {
-  width: 100%;
-  background: #f1f5f9;
-  border: 1px solid #d1d5db;
-  padding: 12px 14px;
-  border-radius: 10px;
-  font-size: 1rem;
-  transition: 0.25s ease;
-}
-
-.form-input:focus {
-  border-color: #60a5fa;
-  box-shadow: 0 0 8px rgba(96,165,250,0.35);
-  background: white;
-}
-
-/* ============================
-   PREMIUM BUTTON
-============================ */
-.premium-btn {
-  width: 100%;
-  padding: 14px;
-  border-radius: 14px;
-  background: linear-gradient(90deg, #60a5fa, #8b5cf6, #ec4899);
-  color: white;
-  font-weight: 600;
-  font-size: 1.05rem;
-  text-align: center;
+/* ===============================
+   ICON BUBBLE
+=============================== */
+.mailbox-wrapper {
   position: relative;
-  overflow: hidden;
-  border: none;
-  cursor: pointer;
-  transition: 0.3s ease-in-out;
+  width: clamp(260px, 38vw, 420px);
+  height: clamp(260px, 38vw, 420px);
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
 }
 
-.premium-btn:hover {
-  transform: translateY(-3px) scale(1.02);
-  filter: brightness(1.08);
-  box-shadow: 0 10px 24px rgba(90, 90, 255, 0.25);
+.mail-logo-premium {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: clamp(220px, 32vw, 340px);
+  height: clamp(220px, 32vw, 340px);
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%,
+    rgba(255, 255, 255, .98),
+    rgba(255, 255, 255, .60),
+    rgba(255, 255, 255, .28)
+  );
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 10px 26px rgba(0,0,0,.08),
+    0 0 44px rgba(139,92,246,.28),
+    0 0 32px rgba(236,72,153,.22);
+  transition: .35s ease;
+  z-index: 2;
 }
 
-.premium-btn:active {
-  transform: scale(0.97);
+.mail-logo-premium:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow:
+    0 16px 48px rgba(138,100,255,.40),
+    0 10px 22px rgba(236,72,153,.25);
 }
 
-/* Sliding arrow animation */
-.btn-arrow {
-  transition: transform 0.3s ease;
+/* ===============================
+   ICON
+=============================== */
+.premium-envelope {
+  font-size: clamp(92px, 14vw, 150px);
+  color: currentColor;
+  filter: drop-shadow(0 4px 14px rgba(139,92,246,.35));
+  animation: mailPulse 6s ease-in-out infinite;
 }
 
-.premium-btn:hover .btn-arrow {
-  transform: translateX(6px);
+.premium-envelope svg {
+  background: linear-gradient(120deg,
+    #3b82f6 0%,
+    #6366f1 35%,
+    #8b5cf6 55%,
+    #ec4899 100%);
+  -webkit-background-clip: text;
+  fill: transparent;
+  stroke: transparent;
 }
 
-/* Disable state */
+
+/* ===============================
+   ANIMATION
+=============================== */
+@keyframes mailPulse {
+  0% { filter: drop-shadow(0 4px 14px rgba(99,102,241,.38)); }
+  50% { filter: drop-shadow(0 14px 28px rgba(236,72,153,.45)); }
+  100% { filter: drop-shadow(0 4px 14px rgba(139,92,246,.35)); }
+}
+
+/* ===============================
+   RIBBONS
+=============================== */
+.ribbon {
+  position: absolute;
+  width: 130%;
+  height: 34%;
+  border-radius: 240px;
+  opacity: .7;
+  filter: blur(28px);
+  z-index: 1;
+}
+
+.ribbon-1 {
+  top: 48%;
+  transform: rotate(-14deg);
+  background: linear-gradient(90deg, #3b82f6, #60a5fa, #ec4899);
+}
+
+.ribbon-2 {
+  top: 32%;
+  transform: rotate(8deg);
+  background: linear-gradient(90deg, #ec4899, #8b5cf6, #3b82f6);
+}
+
+.ribbon-3 {
+  top: 68%;
+  transform: rotate(18deg);
+  background: linear-gradient(98deg, #60a5fa, #8b5cf6, #ec4899);
+}
+
+/* ===============================
+   HEADINGS
+=============================== */
+.hero-title {
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 800;
+  letter-spacing: .4px;
+  color: #111827;
+}
+
+.hero-subtext {
+  margin-top: 6px;
+  font-size: clamp(14px,1.6vw,18px);
+  color: #6b7280;
+}
+
+/* ===============================
+   FORM CARD
+=============================== */
+.form-card {
+  background: rgba(255,255,255,.85);
+  border: 1px solid rgba(229,231,235,.85);
+  border-radius: 24px;
+  padding: clamp(22px, 4vw, 42px);
+  backdrop-filter: blur(18px);
+  transition: .35s ease;
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.06),
+    0 8px 16px rgba(96,165,250,.18);
+}
+
+.form-card:hover {
+  transform: translateY(-3px);
+}
+
+/* ===============================
+   FORM TEXTS
+=============================== */
+.form-title {
+  font-size: clamp(18px,2vw,22px);
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.grad-highlight {
+  background: linear-gradient(90deg,#4f46e5,#ec4899);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.email-line {
+  color: #64748b;
+  font-size: clamp(13px,1.6vw,15px);
+}
+
+.mail-high {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+/* ===============================
+   INPUTS
+=============================== */
+.input-box {
+  width: 100%;
+  padding: clamp(12px,2vw,16px);
+  border-radius: 14px;
+  font-size: clamp(14px,1.7vw,16px);
+  background: #f8fafc;
+  border: 1px solid #d1d5db;
+  transition: .25s ease;
+}
+
+.input-box:focus {
+  background: white;
+  border-color: #6366f1;
+  box-shadow: 0 0 12px rgba(99,102,241,.28);
+}
+
+/* ===============================
+   BUTTON
+=============================== */
+.send-btn {
+  width: 100%;
+  padding: clamp(13px,2vw,18px);
+  border-radius: 16px;
+  border: none;
+  font-size: clamp(15px,1.8vw,18px);
+  font-weight: 600;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(6px,1vw,14px);
+  cursor: pointer;
+  transition: .35s ease;
+  background: linear-gradient(120deg,
+    #4f46e5,
+    #6366f1,
+    #60a5fa,
+    #ec4899);
+  background-size: 220% auto;
+  box-shadow:
+    0 14px 30px rgba(99,102,241,.36),
+    0 6px 16px rgba(0,0,0,.08);
+}
+
+.send-btn:hover:not([disabled]) {
+  transform: translateY(-4px) scale(1.04);
+  filter: brightness(1.14);
+  background-position: right;
+}
+
 button[disabled] {
-  opacity: 0.6;
+  opacity: .55;
   cursor: not-allowed;
 }
 
-/* Success text */
-.success-text {
-  animation: fadeIn .6s ease-out;
+/* ===============================
+   SUCCESS
+=============================== */
+.success-msg {
+  text-align: center;
+  color: #16a34a;
+  font-size: clamp(14px,1.8vw,16px);
+  padding-top: 4px;
+  animation: fadeUp .4s ease-out;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(5px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ===============================
+   MOBILE
+=============================== */
+@media (max-width: 768px) {
+  .hero-left {
+    text-align: center;
+    align-items: center;
+  }
 }

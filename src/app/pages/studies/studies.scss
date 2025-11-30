@@ -1,59 +1,71 @@
+/* ============================
+   SECTION
+============================ */
 .edu-wrapper {
   background: #f8fafc;
 }
 
-/* Center Vertical Line */
-.center-line {
-  display: none !important;
+/* ============================
+   SECTION TITLE
+============================ */
+.edu-title {
+  font-size: clamp(24px, 4vw, 40px);
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: .4px;
 }
 
-
-/* Timeline item */
+/* ============================
+   TIMELINE ITEM
+============================ */
 .edu-item {
   text-align: center;
-  --color1: #3b82f6;
-  --color2: #8b5cf6;
-  --color3: #10b981;
-
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.7s ease;
+  transition: opacity .6s ease, transform .6s ease;
   transition-delay: var(--delay);
 }
-
 .edu-item.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Year circle */
+/* ============================
+   YEAR CIRCLE (premium)
+============================ */
 .circle {
-  width: 80px;
-  height: 80px;
+  width: clamp(70px, 8vw, 90px);
+  height: clamp(70px, 8vw, 90px);
   border-radius: 50%;
   margin: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-
   background: white;
+
   border: 3px solid #3b82f6;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+  transition: .3s ease;
 }
 
+.shadow-circle {
+  box-shadow:
+    0 8px 22px rgba(59,130,246,0.20),
+    0 3px 6px rgba(59,130,246,0.12);
+}
+
+/* Year text */
 .year {
-  font-size: 1.4rem;
+  font-size: clamp(18px, 2vw, 28px);
   font-weight: 700;
   color: #1e3a8a;
 }
 
-/* Arrow bar */
+/* ============================
+   ARROW BAR
+============================ */
 .arrow {
-  height: 12px;
-  width: 80%;
-  max-width: 200px;
-  background: #3b82f6;
-  margin: 12px auto 20px;
+  height: clamp(10px, 1.2vw, 14px);
+  width: clamp(140px, 60%, 260px);
+  background: linear-gradient(90deg,#3b82f6,#6366f1);
+  margin: clamp(10px,1.8vw,24px) auto clamp(14px,1.8vw,24px);
   border-radius: 6px;
   position: relative;
 }
@@ -62,54 +74,64 @@
   content: "";
   position: absolute;
   left: 50%;
-  bottom: -8px;
+  bottom: -9px;
   transform: translateX(-50%);
   border-width: 8px;
   border-style: solid;
-  border-color: #3b82f6 transparent transparent transparent;
+  border-color: #6366f1 transparent transparent transparent;
 }
 
-/* Education Card */
+/* ============================
+   EDUCATION CARD
+============================ */
 .edu-card {
   background: white;
-  padding: 18px;
-  border-radius: 16px;
+  border-radius: clamp(12px,2vw,20px);
+  padding: clamp(16px, 2vw, 28px);
   border: 1px solid #e2e8f0;
-
-  h3 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #1e293b;
-    margin-bottom: 6px;
-  }
-
-  .stream {
-    font-size: 0.9rem;
-    color: #4f46e5;
-    margin-bottom: 4px;
-    font-weight: 500;
-  }
-
-  .inst {
-    font-size: 0.85rem;
-    color: #64748b;
-  }
+  transition: .35s ease;
 }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .center-line {
-    display: none !important;
-  }
+.shadow-card {
+  box-shadow:
+    0 4px 12px rgba(0,0,0,.05),
+    0 10px 24px rgba(0,0,0,.03);
 }
 
-@media (max-width: 500px) {
-  .arrow {
-    width: 90%;
-  }
+.edu-item:hover .edu-card {
+  transform: translateY(-6px);
+  box-shadow:
+    0 16px 32px rgba(0,0,0,.14),
+    0 6px 16px rgba(0,0,0,.06);
+}
 
-  .circle {
-    width: 70px;
-    height: 70px;
+/* ============================
+   TEXT
+============================ */
+.edu-degree {
+  font-size: clamp(15px, 2.0vw, 18px);
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: clamp(4px, .7vw, 10px);
+}
+
+.edu-stream {
+  font-size: clamp(13px,1.6vw,15px);
+  font-weight: 500;
+  color: #4f46e5;
+  margin-bottom: clamp(3px, .5vw, 8px);
+}
+
+.edu-inst {
+  font-size: clamp(13px,1.6vw,15px);
+  color: #6b7280;
+}
+
+/* ============================
+   MOBILE OPTIMIZATION
+============================ */
+@media (max-width: 640px) {
+  .edu-card {
+    padding: clamp(14px,3vw,22px);
   }
 }
