@@ -1,143 +1,102 @@
+<!-- SCROLL PROGRESS BAR -->
+<div class="scroll-progress" [style.width.%]="scrollProgress"></div>
+
 <!-- NAVBAR -->
-<nav class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200 shadow-sm">
+<nav class="site-nav">
   <div class="max-w-6xl mx-auto px-4">
 
     <div class="flex justify-between items-center py-4">
 
- <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2.5">
 
-  <!-- 3D Rotating Logo -->
-<div class="logo-3d-wrapper">
-  <svg viewBox="0 0 200 200" class="logo-3d-svg">
-    <defs>
-      <!-- Gradient -->
-      <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#ff2cdf"/>
-        <stop offset="50%" stop-color="#ff6a3d"/>
-        <stop offset="100%" stop-color="#ffb300"/>
-      </linearGradient>
-    </defs>
+        <!-- Premium Brand Logo: SP Monogram in code brackets -->
+        <a (click)="scrollTo('bio', $event)" class="brand-mark" aria-label="Sayan Pramanick">
+          <svg viewBox="0 0 64 64" class="brand-svg" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="brandFill" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%"   stop-color="#6366f1"/>
+                <stop offset="50%"  stop-color="#8b5cf6"/>
+                <stop offset="100%" stop-color="#ec4899"/>
+              </linearGradient>
+              <filter id="brandGlow" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="1.4" result="blur"/>
+                <feMerge>
+                  <feMergeNode in="blur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
 
-    <!-- Glow circle -->
-    <circle cx="100" cy="100" r="90" class="outer-glow"/>
+            <!-- Rounded squircle background with gradient -->
+            <rect x="2" y="2" width="60" height="60" rx="16"
+                  fill="url(#brandFill)"
+                  filter="url(#brandGlow)"/>
 
-    <!-- Mesh Logo (Triangular Pattern) -->
-    <g fill="none" stroke="url(#neonGradient)" stroke-width="8" stroke-linecap="round">
-      <path d="M40,60 L100,30 L160,60 L160,140 L100,170 L40,140 Z" />
-      <path d="M40,100 L100,70 L160,100" />
-      <path d="M40,100 L100,130 L160,100" />
-      <path d="M70,50 L130,150" />
-      <path d="M130,50 L70,150" />
-    </g>
-  </svg>
-</div>
+            <!-- Glassy highlight -->
+            <path d="M2 18 Q2 2 18 2 L46 2 Q42 16 30 22 Q14 28 2 28 Z"
+                  fill="rgba(255,255,255,0.18)"/>
 
+            <!-- Code brackets with stylized S -->
+            <g fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M 22 22 L 14 32 L 22 42"/>
+              <path d="M 42 22 L 50 32 L 42 42"/>
+            </g>
 
-  <!-- Existing Title -->
-<a (click)="scrollTo('bio', $event)"
-   class="brand-title cursor-pointer select-none">
-  Dev <span>Portfolio</span>
-</a>
+            <path d="M 36 24
+                     Q 28 24 28 28
+                     Q 28 32 32 32
+                     Q 36 32 36 36
+                     Q 36 40 28 40"
+                  fill="none" stroke="#fff" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round"/>
 
+            <circle cx="50" cy="14" r="3" fill="#fde047">
+              <animate attributeName="opacity"
+                       values="0.5;1;0.5"
+                       dur="1.6s" repeatCount="indefinite"/>
+            </circle>
+          </svg>
+        </a>
 
-
-</div>
-
-
+        <a (click)="scrollTo('bio', $event)"
+           class="brand-title cursor-pointer select-none">
+          Dev <span>Portfolio</span>
+        </a>
+      </div>
 
       <!-- MOBILE MENU BUTTON -->
-      <button class="md:hidden text-slate-800"
-              (click)="menuOpen = !menuOpen">
-        <svg *ngIf="!menuOpen" class="h-7 w-7" fill="none" stroke="currentColor">
-          <path stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
-        <svg *ngIf="menuOpen" class="h-7 w-7" fill="none" stroke="currentColor">
-          <path stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-        </svg>
+      <button class="menu-btn md:!hidden"
+              (click)="menuOpen = !menuOpen"
+              [class.is-open]="menuOpen"
+              aria-label="Toggle menu">
+        <span></span><span></span><span></span>
       </button>
 
       <!-- DESKTOP MENU -->
-      <ul class="hidden md:flex gap-8 text-sm font-semibold">
-
-        <li>
-          <a (click)="scrollTo('bio', $event)"
-             class="cursor-pointer px-1 transition hover:text-blue-600"
-             [class.text-blue-600]="activeSection === 'bio'"
-             [class.border-b-2]="activeSection === 'bio'"
-             [class.border-blue-600]="activeSection === 'bio'">
-            ABOUT ME
+      <ul class="hidden md:flex gap-7 text-sm font-semibold items-center">
+        <li *ngFor="let item of navItems">
+          <a (click)="scrollTo(item.id, $event)"
+             class="nav-link"
+             [class.active]="activeSection === item.id">
+            {{ item.label }}
           </a>
         </li>
-
-        <li>
-          <a (click)="scrollTo('tech', $event)"
-             class="cursor-pointer px-1 transition hover:text-blue-600"
-             [class.text-blue-600]="activeSection === 'tech'"
-             [class.border-b-2]="activeSection === 'tech'"
-             [class.border-blue-600]="activeSection === 'tech'">
-            TECH STACK
-          </a>
-        </li>
-
-        <li>
-          <a (click)="scrollTo('experience', $event)"
-             class="cursor-pointer px-1 transition hover:text-blue-600"
-             [class.text-blue-600]="activeSection === 'experience'"
-             [class.border-b-2]="activeSection === 'experience'"
-             [class.border-blue-600]="activeSection === 'experience'">
-            EXPERIENCE
-          </a>
-        </li>
-
-        <li>
-          <a (click)="scrollTo('certifications', $event)"
-             class="cursor-pointer px-1 transition hover:text-blue-600"
-             [class.text-blue-600]="activeSection === 'certifications'"
-             [class.border-b-2]="activeSection === 'certifications'"
-             [class.border-blue-600]="activeSection === 'certifications'">
-            CERTIFICATIONS
-          </a>
-        </li>
-
-        <li>
-          <a (click)="scrollTo('studies', $event)"
-             class="cursor-pointer px-1 transition hover:text-blue-600"
-             [class.text-blue-600]="activeSection === 'studies'"
-             [class.border-b-2]="activeSection === 'studies'"
-             [class.border-blue-600]="activeSection === 'studies'">
-            EDUCATION
-          </a>
-        </li>
-
-
-        <li>
-          <a (click)="scrollTo('contact', $event)"
-             class="cursor-pointer px-1 transition hover:text-blue-600"
-             [class.text-blue-600]="activeSection === 'contact'"
-             [class.border-b-2]="activeSection === 'contact'"
-             [class.border-blue-600]="activeSection === 'contact'">
-            CONTACT ME
-          </a>
-        </li>
-
       </ul>
 
     </div>
 
-
     <!-- MOBILE MENU -->
-<ul *ngIf="menuOpen"
-    class="mobile-menu md:hidden flex flex-col gap-3">
-
-  <li><a (click)="scrollTo('bio',$event); menuOpen=false" class="mobile-item">ABOUT ME</a></li>
-  <li><a (click)="scrollTo('tech',$event); menuOpen=false" class="mobile-item">TECH STACK</a></li>
-  <li><a (click)="scrollTo('experience',$event); menuOpen=false" class="mobile-item">EXPERIENCE</a></li>
-  <li><a (click)="scrollTo('certifications',$event); menuOpen=false" class="mobile-item">CERTIFICATIONS</a></li>
-  <li><a (click)="scrollTo('studies',$event); menuOpen=false" class="mobile-item">EDUCATION</a></li>
-  <li><a (click)="scrollTo('contact',$event); menuOpen=false" class="mobile-item">CONTACT ME</a></li>
-
-</ul>
-
+    <ul *ngIf="menuOpen"
+        class="mobile-menu md:hidden flex flex-col">
+      <li *ngFor="let item of navItems; let i = index">
+        <a (click)="scrollTo(item.id, $event); menuOpen=false"
+           class="mobile-item"
+           [class.active]="activeSection === item.id"
+           [style.animation-delay.ms]="i * 60">
+          {{ item.label }}
+        </a>
+      </li>
+    </ul>
 
   </div>
 </nav>
@@ -146,44 +105,37 @@
 <!-- SECTIONS -->
 <main class="w-full">
 
-  <!-- BIO -->
-  <section id="bio" class="py-16 px-5 bg-white">
+  <section id="bio" class="section-shell bg-bio">
     <div class="max-w-6xl mx-auto">
       <app-bio></app-bio>
     </div>
   </section>
 
-  <!-- TECH -->
-  <section id="tech" class="py-16 px-5 bg-gray-50">
+  <section id="tech" class="section-shell bg-tech">
     <div class="max-w-6xl mx-auto">
       <app-tech></app-tech>
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
-  <section id="experience" class="py-16 px-5 bg-white">
+  <section id="experience" class="section-shell bg-experience">
     <div class="max-w-6xl mx-auto">
       <app-experience></app-experience>
     </div>
   </section>
 
-  <!-- CERTIFICATIONS -->
-  <section id="certifications" class="py-16 px-5 bg-gray-50">
+  <section id="certifications" class="section-shell bg-certifications">
     <div class="max-w-6xl mx-auto">
       <app-certifications></app-certifications>
     </div>
   </section>
 
-  <!-- STUDIES -->
-  <section id="studies" class="py-16 px-5 bg-white">
+  <section id="studies" class="section-shell bg-studies">
     <div class="max-w-6xl mx-auto">
       <app-studies></app-studies>
     </div>
   </section>
 
-
-  <!-- CONTACT -->
-  <section id="contact" class="py-16 px-5 bg-white">
+  <section id="contact" class="section-shell bg-contact">
     <div class="max-w-6xl mx-auto">
       <app-contact></app-contact>
     </div>
@@ -191,3 +143,32 @@
 
 </main>
 
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row items-center justify-between gap-3">
+    <p class="text-sm text-slate-500">
+      © {{ currentYear }} <span class="font-semibold text-slate-700">Sayan Pramanick</span>. Built with Angular &amp; Tailwind.
+    </p>
+    <div class="footer-socials">
+      <a href="https://github.com/Maximus051996" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.6-1.3-1.6-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2.9-.3 1.9-.4 2.9-.4s2 .1 2.9.4C17 4.4 18 4.7 18 4.7c.6 1.6.2 2.8.1 3.1.7.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+      </a>
+      <a href="https://linkedin.com/in/sayanpramanick07" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.4 20.4h-3.6v-5.6c0-1.3 0-3.1-1.9-3.1s-2.2 1.5-2.2 3v5.7H9.1V9h3.5v1.6h.1c.5-.9 1.7-1.9 3.5-1.9 3.7 0 4.4 2.4 4.4 5.6v6.1zM5 7.4c-1.2 0-2.1-1-2.1-2.2s.9-2.2 2.1-2.2 2.1 1 2.1 2.2-.9 2.2-2.1 2.2zm1.8 13H3.2V9h3.6v11.4z"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<!-- BACK TO TOP -->
+<button *ngIf="scrollProgress > 8"
+        (click)="scrollTo('bio', $event)"
+        class="back-to-top"
+        aria-label="Back to top">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 19V5"/><path d="M5 12l7-7 7 7"/>
+  </svg>
+</button>
+
+<!-- AI CHATBOT -->
+<app-chatbot></app-chatbot>

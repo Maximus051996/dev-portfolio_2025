@@ -1,68 +1,47 @@
-<div class="flex flex-col items-center w-full py-12 space-y-10" *ngIf="tech$ | async as tech">
+<div class="tech-wrap" *ngIf="tech$ | async as tech">
 
-  <!-- Title -->
-<h2 class="tech-title-gradient">
-  Enterprise Tech Stack
-</h2>
-
-  <!-- Application Platform -->
-  <div class="relative flex flex-col items-center">
-    <div
-      class="rounded-full font-semibold text-white shadow-xl backdrop-blur-xl
-             bg-gradient-to-r from-blue-500 to-blue-700"
-      style="
-        padding: clamp(10px, 1.4vw, 14px) clamp(18px, 3vw, 40px);
-        font-size: clamp(14px, 2vw, 18px);
-      ">
-      Application Platform
-    </div>
-
-    <div class="bg-blue-400"
-         style="width:2px;height: clamp(42px, 7vw, 80px);margin-top:6px;">
-    </div>
+  <!-- Section heading -->
+  <div class="tech-head">
+    <div class="eyebrow section-eyebrow" appReveal="zoom">My Toolbox</div>
+    <h2 class="tech-title-gradient gradient-sweep" appReveal="rise" delay="80">Enterprise Tech Stack</h2>
+    <p class="tech-subtitle" appReveal delay="160">
+      A curated set of technologies I use to ship fast, secure, and scalable products.
+    </p>
   </div>
 
-  <!-- Connector line -->
-  <div class="w-full flex justify-center">
-    <div class="bg-gradient-to-r from-emerald-400 via-purple-500 to-blue-500"
-         style="width: clamp(260px, 60vw, 1000px); height: 2px;">
-    </div>
-  </div>
+  <!-- Cards grid -->
+  <div class="tech-grid">
+    <div class="tech-card card-hover"
+         *ngFor="let c of categories; let i = index"
+         #techCard
+         appReveal="rise"
+         [delay]="i * 90"
+         [style.--accent]="c.cssAccent">
 
-  <!-- Categories & Chips -->
-  <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-10 mt-6 w-full max-w-6xl">
+      <!-- Glow halo -->
+      <div class="card-halo"></div>
 
-    <div class="flex flex-col items-center gap-4"
-         *ngFor="let c of categories">
-
-      <div class="bg-gray-300"
-           style="width:2px;height: clamp(18px, 4vw, 36px);"></div>
-
-      <!-- Category badge -->
-      <div
-        class="rounded-full font-semibold text-white shadow-lg
-               bg-gradient-to-r {{c.color}} backdrop-blur-xl"
-        style="
-          padding: clamp(6px,1.2vw,10px) clamp(16px,2vw,26px);
-          font-size: clamp(12px,1.6vw,16px);
-        ">
-        {{ c.label }}
+      <!-- Icon + title row -->
+      <div class="card-head">
+        <div class="card-icon" [innerHTML]="c.icon"></div>
+        <div>
+          <h3 class="card-title">{{ c.label }}</h3>
+          <p class="card-count">{{ tech[c.key].length }} technologies</p>
+        </div>
       </div>
 
       <!-- Stack chips -->
-      <div class="flex flex-wrap justify-center gap-3">
-        <span
-          *ngFor="let item of tech[c.key]"
-          class="rounded-full shadow-sm bg-white text-gray-700 border border-gray-200 cursor-pointer
-                 hover:bg-gray-900 hover:text-white hover:shadow-md transition-all"
-          style="
-            padding: clamp(6px, 1vw, 10px) clamp(14px, 2vw, 22px);
-            font-size: clamp(12px, 1.4vw, 15px);
-          ">
+      <div class="chip-row">
+        <span *ngFor="let item of tech[c.key]; let j = index"
+              class="tech-chip"
+              [style.--chip-accent]="c.cssAccent"
+              [style.animation-delay.ms]="(i * 90) + (j * 50)">
           {{ item }}
         </span>
       </div>
 
+      <!-- Bottom progress bar -->
+      <div class="card-bar"></div>
     </div>
   </div>
 </div>

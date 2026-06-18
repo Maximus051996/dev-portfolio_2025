@@ -1,72 +1,506 @@
-<section class="p-6 bg-white">
-  <div
-    *ngIf="bio$ | async as bio"
-    class="flex flex-col md:flex-row items-center gap-8 animate-fade-in-up"
-  >
+<section class="bio-section" *ngIf="bio$ | async as bio">
+  <div class="bio-grid">
 
-    <!-- Profile Image -->
-    <img
-      [src]="bio.avatar"
-      alt="Profile"
-      class="avatar-img"
-    />
+    <!-- ===== LEFT: AVATAR ONLY ===== -->
+    <div class="bio-identity"
+         #avatarWrap
+         (mousemove)="onAvatarMove($event)"
+         (mouseleave)="onAvatarLeave()">
 
-    <!-- Text Section -->
-    <div class="text-center md:text-left animate-slide-in-right w-full">
+      <div class="avatar-stack" #avatarStack>
 
-      <!-- NAME -->
-      <h1 class="bio-name opacity-0 animate-fade-in delay-200">
-        {{ bio.fullName }}
-      </h1>
+        <!-- Parallax floating particles -->
+        <div class="particle p1"></div>
+        <div class="particle p2"></div>
+        <div class="particle p3"></div>
+        <div class="particle p4"></div>
+        <div class="particle p5"></div>
 
-      <!-- Availability -->
-      <div class="mt-3 flex justify-center md:justify-start">
-        <div class="availability-pill">
-          <span class="pulse-dot"></span>
-          Available — Open to Relocate
+        <!-- Background gradient blob -->
+        <div class="bg-blob"></div>
+        <div class="bg-grid"></div>
+
+        <!-- Avatar wrapped in gradient border -->
+        <div class="avatar-frame">
+          <svg class="dev-avatar" viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg" aria-label="Developer at workstation">
+            <defs>
+              <!-- Dark room ambience -->
+              <radialGradient id="roomBg" cx="55%" cy="60%" r="80%">
+                <stop offset="0%"   stop-color="#1e3a8a" stop-opacity=".55"/>
+                <stop offset="40%"  stop-color="#0c1733"/>
+                <stop offset="100%" stop-color="#040814"/>
+              </radialGradient>
+
+              <!-- Monitor screen background -->
+              <linearGradient id="screenBg" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%"   stop-color="#0b1220"/>
+                <stop offset="100%" stop-color="#020617"/>
+              </linearGradient>
+
+              <!-- Cyan rim light on the developer -->
+              <linearGradient id="rimLight" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%"   stop-color="#0ea5e9" stop-opacity="0"/>
+                <stop offset="50%"  stop-color="#22d3ee" stop-opacity=".8"/>
+                <stop offset="100%" stop-color="#0ea5e9" stop-opacity="0"/>
+              </linearGradient>
+
+              <!-- Pink/magenta side glow from screen -->
+              <linearGradient id="screenGlow" x1="50%" y1="0%" x2="50%" y2="100%">
+                <stop offset="0%"   stop-color="#a855f7" stop-opacity=".55"/>
+                <stop offset="100%" stop-color="#22d3ee" stop-opacity=".25"/>
+              </linearGradient>
+
+              <!-- Headphones -->
+              <linearGradient id="hpGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%"  stop-color="#1e293b"/>
+                <stop offset="100%" stop-color="#0f172a"/>
+              </linearGradient>
+
+              <!-- Shirt (light blue under cyan light) -->
+              <linearGradient id="shirtGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%"  stop-color="#7dd3fc"/>
+                <stop offset="50%" stop-color="#38bdf8"/>
+                <stop offset="100%" stop-color="#0284c7"/>
+              </linearGradient>
+
+              <!-- Skin (back of head/neck) -->
+              <linearGradient id="skinG" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%"  stop-color="#d6a07a"/>
+                <stop offset="100%" stop-color="#b87a55"/>
+              </linearGradient>
+
+              <!-- Hair (back) -->
+              <linearGradient id="hairBack" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%"  stop-color="#1f2937"/>
+                <stop offset="100%" stop-color="#0b0f17"/>
+              </linearGradient>
+
+              <!-- Desk -->
+              <linearGradient id="deskWood" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%"  stop-color="#3f2a1a"/>
+                <stop offset="100%" stop-color="#1f1208"/>
+              </linearGradient>
+
+              <!-- Glow filter for monitor -->
+              <filter id="monitorGlow" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+
+            <!-- ===== ROOM BACKGROUND ===== -->
+            <rect width="480" height="480" fill="url(#roomBg)"/>
+
+            <!-- Soft ambient blobs -->
+            <ellipse cx="240" cy="180" rx="200" ry="120" fill="#1d4ed8" opacity=".25"/>
+            <ellipse cx="380" cy="140" rx="120" ry="90" fill="#a855f7" opacity=".22"/>
+            <ellipse cx="100" cy="380" rx="140" ry="80" fill="#0891b2" opacity=".25"/>
+
+            <!-- Grid floor lines (subtle) -->
+            <g stroke="#1e3a8a" stroke-width="0.5" opacity=".4">
+              <line x1="0" y1="380" x2="480" y2="380"/>
+              <line x1="0" y1="410" x2="480" y2="410"/>
+              <line x1="0" y1="440" x2="480" y2="440"/>
+            </g>
+
+            <!-- ===== BACKGROUND BOOKSHELF (left) ===== -->
+            <g opacity=".7">
+              <rect x="20"  y="190" width="80" height="200" fill="#0f172a"/>
+              <rect x="22"  y="194" width="76" height="60"  fill="#1e293b"/>
+              <rect x="22"  y="258" width="76" height="60"  fill="#1e293b"/>
+              <rect x="22"  y="322" width="76" height="60"  fill="#1e293b"/>
+              <!-- books -->
+              <rect x="28"  y="200" width="8"  height="50" fill="#7c2d12"/>
+              <rect x="38"  y="208" width="8"  height="42" fill="#1d4ed8"/>
+              <rect x="48"  y="204" width="8"  height="46" fill="#166534"/>
+              <rect x="58"  y="212" width="8"  height="38" fill="#7c2d12"/>
+              <rect x="68"  y="206" width="8"  height="44" fill="#92400e"/>
+              <rect x="78"  y="210" width="8"  height="40" fill="#1d4ed8"/>
+
+              <rect x="28"  y="266" width="60" height="44" fill="#22c55e" opacity=".4"/>
+              <rect x="32"  y="270" width="52" height="36" fill="#0f172a"/>
+
+              <rect x="28"  y="330" width="8"  height="46" fill="#7c2d12"/>
+              <rect x="38"  y="334" width="8"  height="42" fill="#166534"/>
+              <rect x="48"  y="328" width="8"  height="48" fill="#92400e"/>
+              <rect x="58"  y="332" width="8"  height="44" fill="#1d4ed8"/>
+              <rect x="68"  y="338" width="8"  height="38" fill="#7c2d12"/>
+              <rect x="78"  y="334" width="8"  height="42" fill="#166534"/>
+            </g>
+
+            <!-- ===== WALL CODE (ghost code projected on wall, animated) ===== -->
+            <g class="wall-code" font-family="JetBrains Mono, monospace" font-size="6" font-weight="600">
+              <!-- block 1 -->
+              <text x="120" y="50"  fill="#22d3ee" opacity=".85">const app = createApp(App);</text>
+              <text x="120" y="60"  fill="#a78bfa" opacity=".75">app.use(router).use(store);</text>
+              <text x="120" y="70"  fill="#fbbf24" opacity=".75">app.mount('#root');</text>
+              <text x="120" y="84"  fill="#34d399" opacity=".7">if (env === 'production') {{ '{' }}</text>
+              <text x="128" y="94"  fill="#e2e8f0" opacity=".7">  enableServiceWorker();</text>
+              <text x="120" y="104" fill="#34d399" opacity=".7">{{ '}' }}</text>
+              <text x="120" y="118" fill="#f472b6" opacity=".75">function fetchData() {{ '{' }}</text>
+              <text x="128" y="128" fill="#a5f3fc" opacity=".7">  return fetch(API_URL)</text>
+              <text x="128" y="138" fill="#a5f3fc" opacity=".7">    .then(r =&gt; r.json())</text>
+              <text x="128" y="148" fill="#a5f3fc" opacity=".7">    .catch(handleErr);</text>
+              <text x="120" y="158" fill="#f472b6" opacity=".75">{{ '}' }}</text>
+
+              <!-- block 2 -->
+              <text x="320" y="40"  fill="#fbbf24" opacity=".75">[INFO] build started</text>
+              <text x="320" y="50"  fill="#34d399" opacity=".7">[OK]   modules: 142</text>
+              <text x="320" y="60"  fill="#34d399" opacity=".7">[OK]   chunks: 8</text>
+              <text x="320" y="70"  fill="#34d399" opacity=".7">[OK]   bundle: 264kb</text>
+              <text x="320" y="84"  fill="#22d3ee" opacity=".85">$ ng build --prod</text>
+              <text x="320" y="94"  fill="#94a3b8" opacity=".55">▒▒▒▒▒▒▒▒▒▒░░░░░ 76%</text>
+              <text x="320" y="108" fill="#a78bfa" opacity=".75">@Component({{ '{' }}</text>
+              <text x="328" y="118" fill="#60a5fa" opacity=".7">  selector: 'app',</text>
+              <text x="328" y="128" fill="#60a5fa" opacity=".7">  standalone: true</text>
+              <text x="320" y="138" fill="#a78bfa" opacity=".75">{{ '}' }})</text>
+            </g>
+
+            <!-- ===== DESK ===== -->
+            <rect x="0" y="400" width="480" height="80" fill="url(#deskWood)"/>
+            <rect x="0" y="400" width="480" height="3"  fill="#0f172a" opacity=".6"/>
+
+            <!-- Desk reflection from monitor -->
+            <ellipse cx="240" cy="402" rx="180" ry="10" fill="#22d3ee" opacity=".18"/>
+
+            <!-- ===== MONITOR ===== -->
+            <g class="monitor" filter="url(#monitorGlow)">
+              <!-- bezel -->
+              <rect x="148" y="160" width="240" height="170" rx="6" fill="#0b1220" stroke="#1e293b" stroke-width="2"/>
+              <!-- screen -->
+              <rect x="156" y="168" width="224" height="154" rx="3" fill="url(#screenBg)"/>
+
+              <!-- Editor sidebar -->
+              <rect x="156" y="168" width="36" height="154" fill="#0f172a"/>
+              <g fill="#475569">
+                <rect x="162" y="178" width="24" height="2" rx="1"/>
+                <rect x="162" y="186" width="18" height="2" rx="1"/>
+                <rect x="162" y="194" width="22" height="2" rx="1"/>
+                <rect x="162" y="202" width="16" height="2" rx="1"/>
+                <rect x="162" y="210" width="20" height="2" rx="1"/>
+                <rect x="162" y="218" width="14" height="2" rx="1"/>
+              </g>
+
+              <!-- Tab bar -->
+              <rect x="192" y="168" width="188" height="14" fill="#0f172a"/>
+              <rect x="196" y="170" width="50" height="10" rx="2" fill="#1e293b"/>
+              <text x="221" y="178" text-anchor="middle"
+                    font-family="JetBrains Mono, monospace" font-size="6" fill="#a5b4fc">app.ts</text>
+              <rect x="248" y="170" width="42" height="10" rx="2" fill="#172033"/>
+              <text x="269" y="178" text-anchor="middle"
+                    font-family="JetBrains Mono, monospace" font-size="6" fill="#64748b">main.ts</text>
+
+              <!-- Line numbers -->
+              <g font-family="JetBrains Mono, monospace" font-size="6" fill="#475569">
+                <text x="200" y="196">1</text>
+                <text x="200" y="208">2</text>
+                <text x="200" y="220">3</text>
+                <text x="200" y="232">4</text>
+                <text x="200" y="244">5</text>
+                <text x="200" y="256">6</text>
+                <text x="200" y="268">7</text>
+                <text x="200" y="280">8</text>
+                <text x="200" y="292">9</text>
+                <text x="200" y="304">10</text>
+              </g>
+
+              <!-- Code lines (animated typing) -->
+              <g font-family="JetBrains Mono, monospace" font-size="6.5" font-weight="600">
+                <g class="m-line line-1">
+                  <text x="210" y="196">
+                    <tspan fill="#c084fc">import</tspan>
+                    <tspan fill="#e2e8f0"> {{ '{' }} </tspan>
+                    <tspan fill="#fbbf24">Component</tspan>
+                    <tspan fill="#e2e8f0"> {{ '}' }} </tspan>
+                    <tspan fill="#c084fc">from</tspan>
+                    <tspan fill="#34d399"> '@angular/core'</tspan>
+                  </text>
+                </g>
+
+                <g class="m-line line-2">
+                  <text x="210" y="208">
+                    <tspan fill="#c084fc">import</tspan>
+                    <tspan fill="#e2e8f0"> {{ '{' }} </tspan>
+                    <tspan fill="#fbbf24">DataService</tspan>
+                    <tspan fill="#e2e8f0"> {{ '}' }} </tspan>
+                    <tspan fill="#c084fc">from</tspan>
+                    <tspan fill="#34d399"> './data'</tspan>
+                  </text>
+                </g>
+
+                <g class="m-line line-3">
+                  <text x="210" y="232">
+                    <tspan fill="#fbbf24">@Component</tspan>
+                    <tspan fill="#e2e8f0">({{ '{' }}</tspan>
+                  </text>
+                </g>
+
+                <g class="m-line line-4">
+                  <text x="210" y="244">
+                    <tspan fill="#94a3b8">  </tspan>
+                    <tspan fill="#60a5fa">selector</tspan>
+                    <tspan fill="#94a3b8">:</tspan>
+                    <tspan fill="#34d399"> 'app-bio'</tspan>
+                    <tspan fill="#94a3b8">,</tspan>
+                  </text>
+                </g>
+
+                <g class="m-line line-5">
+                  <text x="210" y="256">
+                    <tspan fill="#94a3b8">  </tspan>
+                    <tspan fill="#60a5fa">standalone</tspan>
+                    <tspan fill="#94a3b8">:</tspan>
+                    <tspan fill="#f472b6"> true</tspan>
+                  </text>
+                </g>
+
+                <g class="m-line line-6">
+                  <text x="210" y="268">
+                    <tspan fill="#e2e8f0">{{ '}' }})</tspan>
+                  </text>
+                </g>
+
+                <g class="m-line line-7">
+                  <text x="210" y="280">
+                    <tspan fill="#c084fc">export class</tspan>
+                    <tspan fill="#fbbf24"> Bio</tspan>
+                    <tspan fill="#e2e8f0"> {{ '{' }}</tspan>
+                  </text>
+                </g>
+
+                <g class="m-line line-8">
+                  <text x="210" y="292">
+                    <tspan fill="#94a3b8">  </tspan>
+                    <tspan fill="#60a5fa">name</tspan>
+                    <tspan fill="#94a3b8"> =</tspan>
+                    <tspan fill="#34d399"> 'Sayan'</tspan>
+                    <tspan fill="#94a3b8">;</tspan>
+                  </text>
+                </g>
+
+                <g class="m-line line-9">
+                  <text x="210" y="304">
+                    <tspan fill="#e2e8f0">{{ '}' }}</tspan>
+                  </text>
+                </g>
+              </g>
+
+              <!-- Animated caret (jumps line by line) -->
+              <rect class="m-caret" x="210" y="190" width="1.6" height="8" fill="#22d3ee"/>
+
+              <!-- Status bar -->
+              <rect x="156" y="312" width="224" height="10" fill="#1e3a8a"/>
+              <text x="162" y="319" font-family="JetBrains Mono, monospace" font-size="6" fill="#bae6fd">
+                ⎇ main · TypeScript · UTF-8 · Ln 9, Col 1
+              </text>
+
+              <!-- monitor stand -->
+              <rect x="232" y="330" width="72" height="6"  fill="#0f172a"/>
+              <rect x="222" y="336" width="92" height="6"  fill="#1e293b" rx="2"/>
+
+              <!-- Soft purple/cyan glow halo around monitor -->
+              <rect x="138" y="150" width="260" height="180" rx="10"
+                    fill="none" stroke="url(#screenGlow)" stroke-width="3" opacity=".55"/>
+            </g>
+
+            <!-- ===== LAPTOP (right of monitor) ===== -->
+            <g opacity=".95">
+              <rect x="392" y="328" width="80" height="56" rx="3" fill="#0f172a"/>
+              <rect x="396" y="332" width="72" height="48" rx="2" fill="#020617"/>
+              <!-- subtle screen content -->
+              <rect x="402" y="340" width="40" height="2" rx="1" fill="#22d3ee" opacity=".5"/>
+              <rect x="402" y="346" width="56" height="2" rx="1" fill="#a855f7" opacity=".5"/>
+              <rect x="402" y="352" width="32" height="2" rx="1" fill="#fbbf24" opacity=".5"/>
+              <rect x="402" y="358" width="48" height="2" rx="1" fill="#34d399" opacity=".5"/>
+              <!-- base -->
+              <path d="M388 384 L476 384 L470 392 L394 392 Z" fill="#1e293b"/>
+            </g>
+
+            <!-- ===== DEVELOPER (back view, silhouette) ===== -->
+            <g class="developer">
+              <!-- Chair back -->
+              <path d="M150 480 L150 380 Q150 364 168 364 L312 364 Q330 364 330 380 L330 480 Z"
+                    fill="#0a0f1f" opacity=".95"/>
+              <rect x="234" y="460" width="12" height="20" fill="#0a0f1f"/>
+
+              <!-- Body / shoulders -->
+              <path d="M170 480 L170 360 Q170 326 240 320 Q310 326 310 360 L310 480 Z"
+                    fill="url(#shirtGrad)"/>
+
+              <!-- Cyan rim light along left shoulder -->
+              <path d="M170 360 Q170 326 240 320 L240 326 Q175 332 176 360 Z"
+                    fill="url(#rimLight)" opacity=".9"/>
+
+              <!-- Magenta rim light along right shoulder -->
+              <path d="M310 360 Q310 326 240 320 L240 326 Q305 332 304 360 Z"
+                    fill="#ec4899" opacity=".4"/>
+
+              <!-- Shirt collar shadow -->
+              <path d="M210 320 Q240 332 270 320 L268 336 Q240 344 212 336 Z"
+                    fill="#0c4a6e" opacity=".6"/>
+
+              <!-- Neck -->
+              <path d="M222 308 Q222 322 240 326 Q258 322 258 308 L258 320 Q248 322 240 322 Q232 322 222 320 Z"
+                    fill="url(#skinG)"/>
+
+              <!-- Head (back) -->
+              <ellipse cx="240" cy="280" rx="42" ry="48" fill="url(#hairBack)"/>
+
+              <!-- Hair texture / strands -->
+              <g stroke="#0b0f17" stroke-width="1" stroke-linecap="round" opacity=".6">
+                <path d="M212 254 Q224 248 232 252" fill="none"/>
+                <path d="M242 248 Q254 246 268 254" fill="none"/>
+                <path d="M218 268 Q230 264 244 268" fill="none"/>
+                <path d="M250 266 Q262 264 270 270" fill="none"/>
+              </g>
+
+              <!-- Cyan rim on top of head -->
+              <path d="M210 264 Q240 232 270 264"
+                    stroke="#22d3ee" stroke-width="2" fill="none" opacity=".5" stroke-linecap="round"/>
+
+              <!-- ===== HEADPHONES ===== -->
+              <!-- headband -->
+              <path d="M198 250 Q240 220 282 250"
+                    stroke="url(#hpGrad)" stroke-width="6" fill="none" stroke-linecap="round"/>
+              <!-- left cup -->
+              <ellipse cx="194" cy="280" rx="14" ry="20" fill="url(#hpGrad)"/>
+              <ellipse cx="194" cy="280" rx="9"  ry="14" fill="#0f172a"/>
+              <circle cx="194" cy="280" r="3"  fill="#22d3ee" class="hp-led"/>
+              <!-- right cup -->
+              <ellipse cx="286" cy="280" rx="14" ry="20" fill="url(#hpGrad)"/>
+              <ellipse cx="286" cy="280" rx="9"  ry="14" fill="#0f172a"/>
+              <circle cx="286" cy="280" r="3"  fill="#22d3ee" class="hp-led"/>
+
+              <!-- Arms reaching forward to keyboard -->
+              <path d="M186 360 Q170 380 200 410 L222 410 Q220 386 200 372 Z"
+                    fill="url(#shirtGrad)"/>
+              <path d="M294 360 Q310 380 280 410 L258 410 Q260 386 280 372 Z"
+                    fill="url(#shirtGrad)"/>
+
+              <!-- Hands resting near keyboard -->
+              <ellipse cx="208" cy="412" rx="10" ry="6" fill="url(#skinG)"/>
+              <ellipse cx="272" cy="412" rx="10" ry="6" fill="url(#skinG)"/>
+
+              <!-- Keyboard hint -->
+              <rect x="190" y="416" width="100" height="8" rx="2" fill="#0f172a"/>
+              <g fill="#475569">
+                <rect x="194" y="418" width="6" height="2" rx="1"/>
+                <rect x="204" y="418" width="6" height="2" rx="1"/>
+                <rect x="214" y="418" width="6" height="2" rx="1"/>
+                <rect x="224" y="418" width="6" height="2" rx="1"/>
+                <rect x="234" y="418" width="6" height="2" rx="1"/>
+                <rect x="244" y="418" width="6" height="2" rx="1"/>
+                <rect x="254" y="418" width="6" height="2" rx="1"/>
+                <rect x="264" y="418" width="6" height="2" rx="1"/>
+                <rect x="274" y="418" width="6" height="2" rx="1"/>
+              </g>
+            </g>
+          </svg>
+
+          <div class="avatar-shine"></div>
         </div>
       </div>
 
-      <!-- Title -->
-      <p class="bio-title opacity-0 animate-fade-in delay-300">
-        {{ bio.title }}
+      <!-- Tech orbit ring beneath avatar -->
+      <div class="tech-orbit">
+        <div class="orbit-ring">
+          <span class="orbit-tech t-net"   style="--i:0">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 4 6v6c0 5 3.4 9 8 10 4.6-1 8-5 8-10V6l-8-4z"/></svg>
+            <em>.NET</em>
+          </span>
+          <span class="orbit-tech t-ang"   style="--i:1">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 9 3-1.4 11L12 22l-7.6-6L3 5l9-3zm0 2.5L5.5 16h2l1.3-3h6.4l1.3 3h2L12 4.5zm0 4 2.3 5h-4.6L12 8.5z"/></svg>
+            <em>Angular</em>
+          </span>
+          <span class="orbit-tech t-sql"   style="--i:2">
+            <svg viewBox="0 0 24 24" fill="currentColor"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>
+            <em>SQL</em>
+          </span>
+          <span class="orbit-tech t-az"    style="--i:3">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 19a4.5 4.5 0 1 0-1.41-8.77 6 6 0 1 0-11.59 2.27A4 4 0 0 0 6 19h11.5z"/></svg>
+            <em>Azure</em>
+          </span>
+          <span class="orbit-tech t-ai"    style="--i:4">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a4 4 0 0 0-4 4v.5A4 4 0 0 0 5 14a4 4 0 0 0 0 6 3.5 3.5 0 0 0 7 0V6a4 4 0 0 0 0-4z" opacity=".55"/><path d="M12 2a4 4 0 0 1 4 4v.5A4 4 0 0 1 19 14a4 4 0 0 1 0 6 3.5 3.5 0 0 1-7 0V6a4 4 0 0 1 0-4z"/></svg>
+            <em>AI</em>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== RIGHT: greeting + status + description ===== -->
+    <div class="bio-text">
+
+      <!-- Greeting -->
+      <h1 class="bio-name" appReveal="rise">
+        <span class="hello-wave">👋</span>
+        {{ bio.fullName }}
+      </h1>
+
+      <!-- Availability badge -->
+      <div class="availability-pill" appReveal="left" delay="120">
+        <span class="pulse-dot"></span>
+        Available — Open to Relocate
+      </div>
+
+      <!-- Animated cycling role -->
+      <p class="bio-title" appReveal="rise" delay="200">
+        <span class="role-prefix">I build </span>
+        <span class="role-cycle">
+          <span class="role-current">{{ currentRole }}</span>
+          <span class="caret"></span>
+        </span>
       </p>
+
+      <!-- Subtitle -->
+      <p class="bio-subtitle" appReveal delay="280">{{ bio.title }}</p>
+
+      <!-- Stats row -->
+      <div class="stats-row">
+        <div class="stat tilt-card" appReveal="zoom" delay="340">
+          <div class="stat-num"><span appCountUp="6" suffix="+">0+</span></div>
+          <div class="stat-label">Years<br/>Experience</div>
+        </div>
+        <div class="stat tilt-card" appReveal="zoom" delay="420">
+          <div class="stat-num"><span appCountUp="25" suffix="+">0+</span></div>
+          <div class="stat-label">Projects<br/>Delivered</div>
+        </div>
+        <div class="stat tilt-card" appReveal="zoom" delay="500">
+          <div class="stat-num"><span appCountUp="4">0</span></div>
+          <div class="stat-label">Cloud<br/>Certifications</div>
+        </div>
+      </div>
 
       <!-- Summary -->
-      <p class="bio-summary opacity-0 animate-fade-in delay-500">
-        {{ bio.summary }}
-      </p>
+      <p class="bio-summary" appReveal delay="580">{{ bio.summary }}</p>
 
       <!-- Social Icons -->
-      <div class="mt-5 flex justify-center md:justify-start gap-4">
-        <a
-          *ngFor="let s of bio.socials"
-          [href]="s.url"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="social-icon"
-          [attr.aria-label]="s.name"
-        >
-          <fa-icon [icon]="iconMap[s.icon!]" class="text-xl"></fa-icon>
+      <div class="social-row" appReveal delay="640">
+        <a *ngFor="let s of bio.socials; let i = index"
+           [href]="s.url"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="social-icon"
+           appMagnetic
+           [strength]="10"
+           [attr.aria-label]="s.name">
+          <fa-icon [icon]="iconMap[s.icon!]"></fa-icon>
         </a>
       </div>
 
       <!-- Buttons -->
-      <div class="mt-6 flex flex-col sm:flex-row justify-center md:justify-start gap-4">
-        <button
-          (click)="scrollToContact()"
-          class="btn-outline"
-        >
+      <div class="cta-row" appReveal delay="720">
+        <button (click)="scrollToContact()" class="btn-outline" appMagnetic [strength]="14">
           <span>Get in touch</span>
           <span class="arrow">→</span>
         </button>
 
-        <a
-          href="/resume/Resume_Sayan Pramanick.pdf"
-          target="_blank"
-          rel="noreferrer"
-          class="btn-gradient"
-        >
+        <a href="/resume/Resume_Sayan Pramanick.pdf"
+           target="_blank"
+           rel="noreferrer"
+           class="btn-gradient"
+           appMagnetic
+           [strength]="14">
           <svg xmlns="http://www.w3.org/2000/svg"
                fill="none" viewBox="0 0 24 24"
                stroke-width="1.7" stroke="currentColor"
@@ -77,7 +511,12 @@
           Download Resume
         </a>
       </div>
-
     </div>
+  </div>
+
+  <!-- Scroll cue -->
+  <div class="scroll-cue">
+    <span></span>
+    <p>Scroll to explore</p>
   </div>
 </section>

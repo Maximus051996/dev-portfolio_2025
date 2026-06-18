@@ -1,7 +1,51 @@
 {
-  "Backend": [ ".NET Core", "Python"],
-  "Frontend": ["Angular", "TypeScript", "JavaScript", "Tailwind CSS","Next JS"],
-  "Cloud": ["Azure", "AWS", "Azure DevOps"],
-  "Database": ["SQL Server", "MongoDB", "PostgreSQL"],
-  "Tools": ["Git", "GitHub", "Docker", "Postman", "Swagger"]
+  "Backend": [
+    "C#",
+    ".NET 8 / Core",
+    "ASP.NET Core Web API",
+    "Entity Framework Core",
+    "LINQ",
+    "Node.js",
+    "Python FastAPI"
+  ],
+  "Frontend": [
+    "Angular",
+    "TypeScript",
+    "JavaScript (ES6+)",
+    "RxJS",
+    "NgRx",
+    "HTML5",
+    "CSS3",
+    "Bootstrap"
+  ],
+  "Cloud": [
+    "Azure App Service",
+    "Azure Functions",
+    "Azure Service Bus",
+    "Azure Data Factory",
+    "Azure Key Vault",
+    "Application Insights",
+    "Azure DevOps",
+    "Docker",
+    "Kubernetes (AKS)"
+  ],
+  "Database": [
+    "SQL Server",
+    "Azure SQL",
+    "Cosmos DB",
+    "MongoDB",
+    "Stored Procedures",
+    "Indexing & Query Tuning"
+  ],
+  "Tools": [
+    "Git",
+    "GitHub",
+    "Azure Repos",
+    "Visual Studio",
+    "VS Code",
+    "SSMS",
+    "Postman",
+    "Jira",
+    "Kafka"
+  ]
 }

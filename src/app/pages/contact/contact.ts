@@ -1,21 +1,18 @@
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 import { DataService } from '../../core/services/data.service';
+import { RevealDirective, MagneticDirective } from '../../core/directives';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule, FormsModule, FontAwesomeModule],
+  imports: [CommonModule, FormsModule, RevealDirective, MagneticDirective],
   templateUrl: './contact.html',
   styleUrls: ['./contact.scss'],
 })
 export class Contact {
-  faEnvelope = faEnvelope;
-
   loading = false;
   success = false;
 

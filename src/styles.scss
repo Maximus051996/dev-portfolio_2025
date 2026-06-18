@@ -1,16 +1,128 @@
 @use "tailwindcss";
 
+/* =====================================================
+   GLOBAL DESIGN TOKENS & FONTS
+===================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root {
+  --c-bg: #f6f8fc;
+  --c-fg: #0f172a;
+  --c-muted: #64748b;
+  --c-primary: #6366f1;
+  --c-accent: #ec4899;
+  --c-cyan: #06b6d4;
+  --c-amber: #f59e0b;
+  --c-emerald: #10b981;
+
+  --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+  --gradient-aurora: linear-gradient(135deg, #6366f1 0%, #06b6d4 50%, #10b981 100%);
+  --gradient-sunset: linear-gradient(135deg, #f59e0b 0%, #ec4899 50%, #6366f1 100%);
+
+  --shadow-soft: 0 4px 14px rgba(15, 23, 42, .06);
+  --shadow-md: 0 10px 30px rgba(15, 23, 42, .08);
+  --shadow-lg: 0 24px 48px rgba(15, 23, 42, .12);
+  --shadow-glow: 0 0 0 1px rgba(99, 102, 241, .15), 0 18px 40px rgba(99, 102, 241, .25);
+}
+
+/* =====================================================
+   BASE
+===================================================== */
+* { box-sizing: border-box; }
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px; /* Fix section shifting */
+  scroll-padding-top: 90px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
 
-/* fade-in animation for sections */
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--c-fg);
+  background: var(--c-bg);
+  position: relative;
+  min-height: 100vh;
+  /* Larger touch targets on iOS */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent any element from busting horizontal layout */
+img, svg, video, canvas, audio, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Reduce blob/grid intensity on small screens to keep performance smooth */
+@media (max-width: 640px) {
+  body::before { filter: blur(28px); opacity: .6; }
+  body::after  { background-size: 28px 28px; }
+}
+
+/* Animated aurora background */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -20vmax;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(40vmax 40vmax at 12% 18%, rgba(99, 102, 241, .18), transparent 60%),
+    radial-gradient(40vmax 40vmax at 85% 12%, rgba(236, 72, 153, .14), transparent 60%),
+    radial-gradient(50vmax 50vmax at 50% 95%, rgba(6, 182, 212, .15), transparent 60%);
+  filter: blur(40px);
+  animation: auroraDrift 22s ease-in-out infinite alternate;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(15, 23, 42, .035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, .035) 1px, transparent 1px);
+  background-size: 38px 38px;
+  mask-image: radial-gradient(circle at 50% 30%, black, transparent 80%);
+}
+
+@keyframes auroraDrift {
+  0%   { transform: translate3d(0,0,0) rotate(0deg); }
+  50%  { transform: translate3d(2%, -3%, 0) rotate(8deg); }
+  100% { transform: translate3d(-2%, 2%, 0) rotate(-6deg); }
+}
+
+/* =====================================================
+   HIDE NATIVE SCROLLBAR (still scrollable)
+===================================================== */
+/* Firefox */
+html { scrollbar-width: none; }
+body { scrollbar-width: none; }
+
+/* IE / Edge legacy */
+html, body { -ms-overflow-style: none; }
+
+/* Webkit (Chrome, Safari, Edge, Opera) */
+::-webkit-scrollbar { width: 0; height: 0; display: none; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: transparent; }
+::-webkit-scrollbar-thumb:hover { background: transparent; }
+
+/* =====================================================
+   SECTION ENTRANCE ANIMATION
+===================================================== */
 .section {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity .6s ease, transform .6s ease;
+  transform: translateY(28px);
+  transition: opacity .8s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1);
 }
 
 .section.visible {
@@ -18,3 +130,179 @@ html {
   transform: translateY(0);
 }
 
+/* =====================================================
+   GLOBAL UTILITIES
+===================================================== */
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glass {
+  background: rgba(255, 255, 255, .7);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, .6);
+  box-shadow: var(--shadow-md);
+}
+
+/* Selection color */
+::selection {
+  background: rgba(99, 102, 241, .25);
+  color: #1e1b4b;
+}
+
+/* =====================================================
+   GLOBAL REVEAL-ON-SCROLL SYSTEM
+===================================================== */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity .9s cubic-bezier(.2,.8,.2,1) var(--reveal-delay, 0ms),
+    transform .9s cubic-bezier(.2,.8,.2,1) var(--reveal-delay, 0ms),
+    filter .9s cubic-bezier(.2,.8,.2,1) var(--reveal-delay, 0ms);
+  filter: blur(2px);
+  will-change: opacity, transform;
+}
+
+[data-reveal="left"]  { transform: translateX(-28px); }
+[data-reveal="right"] { transform: translateX(28px); }
+[data-reveal="zoom"]  { transform: scale(.94); }
+[data-reveal="rise"]  { transform: translateY(40px); }
+[data-reveal="blur"]  { filter: blur(8px); }
+
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
+
+/* =====================================================
+   ANIMATED GRADIENT UNDERLINE FOR HEADINGS
+===================================================== */
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #4f46e5;
+  background: rgba(99, 102, 241, .12);
+  border: 1px solid rgba(99, 102, 241, .2);
+  position: relative;
+  overflow: hidden;
+}
+
+.section-eyebrow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg,
+    transparent 0%,
+    rgba(255, 255, 255, .55) 50%,
+    transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3.5s linear infinite;
+}
+
+/* =====================================================
+   GRADIENT SWEEP for big titles
+===================================================== */
+.gradient-sweep {
+  background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899, #f59e0b, #6366f1);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 5s linear infinite;
+}
+
+/* =====================================================
+   MAGNETIC HOVER TARGET
+   (positions follow cursor slightly via JS-set vars)
+===================================================== */
+.magnetic {
+  --mag-x: 0px;
+  --mag-y: 0px;
+  transform: translate3d(var(--mag-x), var(--mag-y), 0);
+  transition: transform .25s cubic-bezier(.2,.8,.2,1);
+}
+
+/* =====================================================
+   ENHANCED CARD HOVER (lift + sheen)
+===================================================== */
+.card-hover {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease;
+}
+
+.card-hover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.5) 50%, transparent 70%);
+  background-size: 250% 100%;
+  background-position: 200% 0;
+  pointer-events: none;
+  transition: background-position .8s cubic-bezier(.2,.8,.2,1);
+  mix-blend-mode: overlay;
+  opacity: 0;
+}
+
+.card-hover:hover::after {
+  background-position: -100% 0;
+  opacity: 1;
+}
+
+.card-hover:hover {
+  transform: translateY(-6px);
+}
+
+/* =====================================================
+   TEXT FADE-IN (per word) for hero/section titles
+===================================================== */
+.split-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: wordIn .7s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+@keyframes wordIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Reusable shimmer */
+@keyframes shimmer {
+  0%   { background-position: -200% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Reusable float */
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+/* Reusable orbit */
+@keyframes orbit {
+  from { transform: rotate(0) translateX(8px) rotate(0); }
+  to   { transform: rotate(360deg) translateX(8px) rotate(-360deg); }
+}
+
+/* Reduce motion respect */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    transition-duration: .001ms !important;
+  }
+}

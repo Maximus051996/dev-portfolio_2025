@@ -1,42 +1,65 @@
-<div class="max-w-6xl mx-auto px-4">
+<div class="exp-wrap">
 
-  <div class="flex flex-col sm:flex-row items-center justify-between mb-12">
-    <h2 class="exp-title text-center sm:text-left">
-      Experience <span class="text-blue-600">Timeline</span>
+  <div class="exp-head">
+    <div class="eyebrow section-eyebrow" appReveal="zoom">My Journey</div>
+    <h2 class="exp-title" appReveal="rise" delay="80">
+      Experience <span class="grad gradient-sweep">Timeline</span>
     </h2>
+    <p class="exp-sub" appReveal delay="160">
+      Six plus years of crafting reliable, cloud-native software at scale.
+    </p>
   </div>
 
-  <div *ngIf="experience$ | async as exp" class="relative timeline-container">
+  <div *ngIf="experience$ | async as exp" class="timeline-container">
 
-    <!-- Timeline vertical guide -->
-    <div class="absolute inset-y-0 left-1/2 timeline-center-line hidden md:block"></div>
+    <!-- Vertical guide line -->
+    <div class="timeline-spine" aria-hidden="true">
+      <div class="spine-fill"></div>
+    </div>
 
-    <ul class="flex flex-col space-y-16">
-      <li
-        *ngFor="let item of exp; let i = index"
-        #timelineItem
-        class="timeline-item flex flex-col md:flex-row items-center md:items-start gap-8 opacity-0 translate-y-6">
+    <ul class="timeline-list">
+      <li *ngFor="let item of exp; let i = index"
+          #timelineItem
+          class="timeline-item"
+          [class.left]="i % 2 === 0"
+          [class.right]="i % 2 !== 0"
+          appReveal="rise"
+          [delay]="i * 140">
 
-        <!-- LEFT DATE -->
+        <!-- Dot marker -->
+        <div class="t-dot">
+          <span class="t-dot-core"></span>
+          <span class="t-dot-pulse"></span>
+        </div>
+
+        <!-- Date badge -->
         <div class="date-card">
           <div class="month">{{ extractMonth(item.duration) }}</div>
           <div class="year">{{ extractYear(item.duration) }}</div>
+          <div class="duration-pill">{{ item.duration }}</div>
         </div>
 
-        <!-- RIGHT CARD -->
-        <article class="exp-card">
-          <div class="company">{{ item.company }}</div>
-          <div class="role">{{ item.role }}</div>
-          <div class="duration mt-1">{{ item.duration }}</div>
+        <!-- Content card -->
+        <article class="exp-card card-hover">
+          <div class="exp-card-head">
+            <div class="company-row">
+              <div class="company-avatar">{{ companyInitials(item.company) }}</div>
+              <div>
+                <div class="company">{{ item.company }}</div>
+                <div class="role">{{ item.role }}</div>
+              </div>
+            </div>
+            <div class="duration mobile-only">{{ item.duration }}</div>
+          </div>
 
-          <ul class="mt-4 space-y-2">
+          <ul class="highlight-list">
             <li *ngFor="let h of item.highlights">
-              • {{ h }}
+              <span class="bullet"></span>
+              <span>{{ h }}</span>
             </li>
           </ul>
         </article>
       </li>
     </ul>
-
   </div>
 </div>

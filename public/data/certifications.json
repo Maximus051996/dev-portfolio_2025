@@ -2,21 +2,25 @@
   {
     "name": "Azure AI Fundamentals",
     "code": "AI-900",
-    "issuer": "Microsoft"
+    "issuer": "Microsoft",
+    "verifyUrl": "https://learn.microsoft.com/en-us/users/sayanpramanick-9877/credentials/388f80e52b6a9093?ref=https%3A%2F%2Fwww.linkedin.com%2F"
   },
   {
     "name": "Azure Fundamentals",
     "code": "AZ-900",
-    "issuer": "Microsoft"
+    "issuer": "Microsoft",
+    "verifyUrl": "https://learn.microsoft.com/api/credentials/share/en-us/sayanpramanick-9877/663F87853FCA15B7?sharingId=261877F1FB19467D"
   },
   {
     "name": "Associate Cloud Engineer",
     "code": "ACE",
-    "issuer": "Google Cloud"
+    "issuer": "Google Cloud",
+    "verifyUrl": "https://www.credly.com/badges/e9f84d04-6b91-45a7-bf8c-7c5d75bac45a/public_url"
   },
   {
     "name": "AWS Cloud Practitioner",
     "code": "CLF-C02",
-    "issuer": "Amazon Web Services"
+    "issuer": "Amazon Web Services",
+    "verifyUrl": "https://www.credly.com/badges/66aa40c1-7753-4829-93ca-dfc8730b2f17/public_url"
   }
 ]

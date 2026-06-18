@@ -5,9 +5,575 @@
   <title>Sayan Pramanick — Full Stack Developer | .NET Core | Angular | Azure | Microservices | SQL</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta name="description" content="Sayan Pramanick — Full Stack Developer with 6+ years of experience building cloud-native, scalable applications using .NET Core, Angular, Azure, and microservices.">
+  <meta name="theme-color" content="#0a0e1a">
+
+  <meta property="og:title" content="Sayan Pramanick — Full Stack Developer">
+  <meta property="og:description" content="Building secure, scalable, cloud-native apps with .NET Core, Angular, and Azure.">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="alternate icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
+
+  <style>
+    /* =====================================================
+       SPLIT-SCREEN LOADER
+       Left: Brand identity + progress  |  Right: Live code
+    ===================================================== */
+    html, body {
+      margin: 0; padding: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+    body {
+      background: #f6f8fc;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    body.is-loading { overflow: hidden; height: 100%; width: 100%; }
+    body.is-loading .scroll-progress { display: none !important; }
+
+    #app-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: #0a0e1a;
+      overflow: hidden;
+      transition: opacity .8s cubic-bezier(.6,.05,.4,1), visibility .8s ease;
+    }
+
+    /* =====================================================
+       LEFT PANEL — brand identity (light)
+    ===================================================== */
+    .panel-left {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 36px;
+      padding: 48px 40px;
+      background: linear-gradient(135deg, #f8fafc 0%, #fef2f8 60%, #f0f9ff 100%);
+      overflow: hidden;
+    }
+
+    /* Soft mesh blobs */
+    .panel-left::before {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background:
+        radial-gradient(560px 420px at 25% 20%, rgba(99,102,241,.30) 0%, transparent 60%),
+        radial-gradient(480px 360px at 75% 85%, rgba(236,72,153,.25) 0%, transparent 60%),
+        radial-gradient(420px 320px at 80% 20%, rgba(34,211,238,.20) 0%, transparent 60%);
+      filter: blur(60px);
+      animation: meshDrift 18s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes meshDrift {
+      0%   { transform: translate3d(0, 0, 0) scale(1); }
+      100% { transform: translate3d(2%, -2%, 0) scale(1.08); }
+    }
+
+    /* Centered content stack */
+    .left-stack {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      max-width: 380px;
+      width: 100%;
+    }
+
+    /* Group: name + role */
+    .name-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+    }
+
+    /* =====================================================
+       LOGO BADGE
+    ===================================================== */
+    .logo-badge {
+      position: relative;
+      width: 84px;
+      height: 84px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 800;
+      font-size: 28px;
+      color: #fff;
+      letter-spacing: -.5px;
+      box-shadow:
+        0 24px 48px -10px rgba(99, 102, 241, .55),
+        0 12px 24px -8px rgba(236, 72, 153, .35),
+        inset 0 1px 0 rgba(255, 255, 255, .35);
+      animation: badgeFloat 3s ease-in-out infinite;
+    }
+
+    .logo-badge::before {
+      content: "";
+      position: absolute;
+      inset: 2px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(255,255,255,.3), transparent 50%);
+    }
+
+    /* Outer ring pulse */
+    .logo-badge::after {
+      content: "";
+      position: absolute;
+      inset: -10px;
+      border-radius: 28px;
+      border: 2px solid rgba(99, 102, 241, .3);
+      animation: ringPulse 2.4s ease-out infinite;
+    }
+
+    @keyframes badgeFloat {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-6px); }
+    }
+
+    @keyframes ringPulse {
+      0%   { transform: scale(.95); opacity: 1; }
+      100% { transform: scale(1.6); opacity: 0; }
+    }
+
+    /* =====================================================
+       BRAND TEXT
+    ===================================================== */
+    .left-name {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(26px, 3vw, 32px);
+      font-weight: 800;
+      letter-spacing: -.5px;
+      color: #0f172a;
+      text-align: center;
+      line-height: 1.15;
+    }
+
+    .left-name .grad {
+      background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+              background-clip: text;
+      color: transparent;
+      animation: shimmerName 4s linear infinite;
+    }
+
+    @keyframes shimmerName {
+      0%   { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    .left-role {
+      margin: 0;
+      font-size: 13.5px;
+      color: #64748b;
+      text-align: center;
+      letter-spacing: .3px;
+      line-height: 1.5;
+    }
+
+    .left-role .pipe {
+      display: inline-block;
+      margin: 0 6px;
+      color: #cbd5e1;
+    }
+
+    /* =====================================================
+       PROGRESS BAR
+    ===================================================== */
+    .left-progress {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: #64748b;
+    }
+
+    .progress-percent {
+      font-weight: 800;
+      background: linear-gradient(90deg, #6366f1, #ec4899);
+      -webkit-background-clip: text;
+              background-clip: text;
+      color: transparent;
+    }
+
+    .progress-track {
+      position: relative;
+      height: 6px;
+      width: 100%;
+      border-radius: 999px;
+      background: rgba(99, 102, 241, .12);
+      overflow: hidden;
+      box-shadow: inset 0 1px 2px rgba(15, 23, 42, .04);
+    }
+
+    .progress-fill {
+      position: absolute;
+      inset: 0 100% 0 0;
+      background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899, #f59e0b);
+      background-size: 220% 100%;
+      border-radius: 999px;
+      animation:
+        progressFill 5.4s cubic-bezier(.4,0,.2,1) forwards,
+        progressShine 2.5s linear infinite;
+    }
+
+    @keyframes progressFill {
+      0%   { right: 100%; }
+      30%  { right: 60%; }
+      55%  { right: 35%; }
+      80%  { right: 10%; }
+      100% { right: 0%; }
+    }
+
+    @keyframes progressShine {
+      from { background-position: 0% 50%; }
+      to   { background-position: 220% 50%; }
+    }
+
+    /* Tech chips below progress */
+    .tech-chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .tech-chip {
+      padding: 5px 11px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      border-radius: 999px;
+      color: #4f46e5;
+      background: rgba(99, 102, 241, .1);
+      border: 1px solid rgba(99, 102, 241, .22);
+      opacity: 0;
+      transform: translateY(6px);
+      animation: chipIn .5s cubic-bezier(.2,.8,.2,1) forwards;
+    }
+
+    .tech-chip:nth-child(1) { animation-delay: .8s; }
+    .tech-chip:nth-child(2) { animation-delay: 1.0s; --c-bg: rgba(236, 72, 153, .1); --c-bd: rgba(236, 72, 153, .25); --c-fg: #db2777; }
+    .tech-chip:nth-child(3) { animation-delay: 1.2s; --c-bg: rgba(245, 158, 11, .1); --c-bd: rgba(245, 158, 11, .25); --c-fg: #d97706; }
+    .tech-chip:nth-child(4) { animation-delay: 1.4s; --c-bg: rgba(6, 182, 212, .1);  --c-bd: rgba(6, 182, 212, .25);  --c-fg: #0891b2; }
+    .tech-chip:nth-child(5) { animation-delay: 1.6s; --c-bg: rgba(16, 185, 129, .1); --c-bd: rgba(16, 185, 129, .25); --c-fg: #059669; }
+
+    .tech-chip:not(:nth-child(1)) {
+      background: var(--c-bg);
+      border-color: var(--c-bd);
+      color: var(--c-fg);
+    }
+
+    @keyframes chipIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =====================================================
+       RIGHT PANEL — code (dark)
+    ===================================================== */
+    .panel-right {
+      position: relative;
+      background:
+        radial-gradient(700px 500px at 70% 30%, rgba(99, 102, 241, .18) 0%, transparent 60%),
+        radial-gradient(600px 400px at 30% 70%, rgba(236, 72, 153, .15) 0%, transparent 60%),
+        #0a0e1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 40px;
+      overflow: hidden;
+    }
+
+    /* Faint code grid */
+    .panel-right::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 80%);
+      pointer-events: none;
+    }
+
+    /* Floating ambient symbols */
+    .ambient-symbols {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+    }
+
+    .ambient-symbols span {
+      position: absolute;
+      opacity: 0;
+      animation: symFade 4s ease-in-out infinite;
+    }
+
+    .ambient-symbols span:nth-child(1) { top: 12%; left: 8%; font-size: 28px; color: rgba(99, 102, 241, .35); animation-delay: 0s; }
+    .ambient-symbols span:nth-child(2) { top: 20%; right: 12%; font-size: 22px; color: rgba(236, 72, 153, .35); animation-delay: -1s; }
+    .ambient-symbols span:nth-child(3) { bottom: 18%; left: 14%; font-size: 24px; color: rgba(34, 211, 238, .35); animation-delay: -2s; }
+    .ambient-symbols span:nth-child(4) { bottom: 14%; right: 8%; font-size: 30px; color: rgba(245, 158, 11, .35); animation-delay: -3s; }
+
+    @keyframes symFade {
+      0%, 100% { opacity: 0; transform: translateY(0); }
+      50%      { opacity: 1; transform: translateY(-6px); }
+    }
+
+    /* =====================================================
+       CODE CONTENT
+    ===================================================== */
+    .code-block {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 480px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      line-height: 1.85;
+      color: #e2e8f0;
+    }
+
+    .code-line {
+      display: block;
+      white-space: pre;
+      overflow: hidden;
+      width: 0;
+      animation: typeLine 1s steps(50, end) forwards;
+    }
+
+    .code-line.l1 { animation-delay: .25s; }
+    .code-line.l2 { animation-delay: 1.05s; }
+    .code-line.l3 { animation-delay: 1.85s; }
+    .code-line.l4 { animation-delay: 2.65s; }
+    .code-line.l5 { animation-delay: 3.45s; }
+    .code-line.l6 { animation-delay: 4.25s; }
+
+    @keyframes typeLine {
+      from { width: 0; }
+      to   { width: 100%; }
+    }
+
+    .syn-key  { color: #c084fc; }
+    .syn-fn   { color: #fbbf24; }
+    .syn-str  { color: #34d399; }
+    .syn-num  { color: #f472b6; }
+    .syn-com  { color: #64748b; font-style: italic; }
+    .syn-pun  { color: #94a3b8; }
+    .syn-prop { color: #60a5fa; }
+    .syn-bool { color: #ec4899; }
+
+    .code-prompt {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      font-size: 12px;
+      color: #64748b;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .code-prompt .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, .6);
+      animation: dotBlink 1.4s ease-in-out infinite;
+    }
+
+    @keyframes dotBlink {
+      0%, 100% { opacity: 1; }
+      50%      { opacity: .35; }
+    }
+
+    .code-caret {
+      display: inline-block;
+      width: 8px;
+      height: 16px;
+      background: #6366f1;
+      vertical-align: -3px;
+      margin-left: 1px;
+      animation: caretBlink 1s steps(1) infinite;
+      box-shadow: 0 0 6px rgba(99, 102, 241, .55);
+    }
+
+    @keyframes caretBlink {
+      50% { opacity: 0; }
+    }
+
+    /* =====================================================
+       FADE-OUT
+    ===================================================== */
+    body.app-ready #app-loader {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    body.app-ready #app-loader .panel-left  { transform: translateX(-4%); transition: transform .7s ease; }
+    body.app-ready #app-loader .panel-right { transform: translateX(4%);  transition: transform .7s ease; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .logo-badge, .progress-fill, .code-line, .code-caret,
+      .left-name .grad, .ambient-symbols span, .tech-chip { animation: none !important; }
+      .progress-fill { right: 0; }
+      .code-line { width: 100%; }
+      .tech-chip { opacity: 1; transform: none; }
+    }
+
+    /* ===== RESPONSIVE: stack panels on small screens ===== */
+    @media (max-width: 900px) {
+      #app-loader {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+      }
+      .panel-left { padding: 36px 24px 24px; }
+      .panel-right { padding: 24px; }
+      .code-block { font-size: 12px; line-height: 1.75; }
+    }
+
+    @media (max-width: 480px) {
+      .left-name { font-size: 24px; }
+      .logo-badge { width: 64px; height: 64px; font-size: 22px; border-radius: 18px; }
+      .left-stack { gap: 18px; max-width: 100%; }
+      .code-block { font-size: 11px; }
+    }
+  </style>
 </head>
-<body>
+<body class="is-loading">
+  <script>
+    window.__appStart = performance.now();
+  </script>
+
+  <div id="app-loader" aria-label="Loading">
+
+    <!-- =================== LEFT PANEL =================== -->
+    <aside class="panel-left">
+      <div class="left-stack">
+
+        <!-- Logo -->
+        <div class="logo-badge">SP</div>
+
+        <!-- Name + role grouped tighter -->
+        <div class="name-group">
+          <h1 class="left-name">
+            Sayan <span class="grad">Pramanick</span>
+          </h1>
+          <p class="left-role">
+            Full Stack Developer
+            <span class="pipe">·</span>
+            .NET <span class="pipe">·</span> Angular <span class="pipe">·</span> Azure
+          </p>
+        </div>
+
+        <!-- Progress -->
+        <div class="left-progress">
+          <div class="progress-meta">
+            <span>Initializing</span>
+            <span class="progress-percent" id="loaderPercent">0%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill"></div>
+          </div>
+        </div>
+
+        <!-- Tech chips -->
+        <div class="tech-chips">
+          <span class="tech-chip">.NET</span>
+          <span class="tech-chip">Angular</span>
+          <span class="tech-chip">SQL</span>
+          <span class="tech-chip">Azure</span>
+          <span class="tech-chip">AI</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- =================== RIGHT PANEL =================== -->
+    <section class="panel-right">
+
+      <!-- Floating ambient symbols -->
+      <div class="ambient-symbols">
+        <span>&lt;/&gt;</span>
+        <span>{ }</span>
+        <span>=&gt;</span>
+        <span>( )</span>
+      </div>
+
+      <div class="code-block">
+        <div class="code-prompt">
+          <span class="dot"></span>
+          <span>portfolio.dev</span>
+        </div>
+
+        <code class="code-line l1"><span class="syn-com">// Initializing portfolio...</span></code>
+        <code class="code-line l2"><span class="syn-key">const</span> <span class="syn-fn">developer</span> <span class="syn-pun">=</span> <span class="syn-pun">{</span></code>
+        <code class="code-line l3">  <span class="syn-prop">name</span><span class="syn-pun">:</span> <span class="syn-str">'Sayan Pramanick'</span><span class="syn-pun">,</span></code>
+        <code class="code-line l4">  <span class="syn-prop">years</span><span class="syn-pun">:</span> <span class="syn-num">6</span><span class="syn-pun">,</span></code>
+        <code class="code-line l5">  <span class="syn-prop">available</span><span class="syn-pun">:</span> <span class="syn-bool">true</span></code>
+        <code class="code-line l6"><span class="syn-pun">};</span><span class="code-caret"></span></code>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Animated percent counter
+    (function () {
+      var el = document.getElementById('loaderPercent');
+      if (!el) return;
+      var start = performance.now();
+      var dur = 5400;
+      function tick(now) {
+        var t = Math.min(1, (now - start) / dur);
+        var eased = 1 - Math.pow(1 - t, 2.4);
+        el.textContent = Math.round(eased * 100) + '%';
+        if (t < 1 && !document.body.classList.contains('app-ready')) {
+          requestAnimationFrame(tick);
+        } else {
+          el.textContent = '100%';
+        }
+      }
+      requestAnimationFrame(tick);
+    })();
+  </script>
+
   <app-root></app-root>
 </body>
 </html>

@@ -1,0 +1,199 @@
+<!-- ============ FLOATING ROBOT LAUNCHER ============ -->
+<button class="cb-launcher"
+        [class.is-open]="open"
+        (click)="toggle()"
+        aria-label="Open AI assistant">
+
+  <!-- Neon platform under the robot -->
+  <div class="cb-stage">
+    <div class="cb-stage-disc"></div>
+    <div class="cb-stage-ring"></div>
+    <div class="cb-stage-glow"></div>
+  </div>
+
+  <!-- The robot itself -->
+  <div class="cb-robot" aria-hidden="true">
+    <div class="cb-antenna">
+      <span class="cb-antenna-tip"></span>
+    </div>
+    <div class="cb-head-shell">
+      <div class="cb-visor">
+        <span class="cb-eye left"></span>
+        <span class="cb-eye right"></span>
+      </div>
+      <span class="cb-mouth"></span>
+      <span class="cb-cheek left"></span>
+      <span class="cb-cheek right"></span>
+      <span class="cb-ear left"></span>
+      <span class="cb-ear right"></span>
+    </div>
+    <div class="cb-neck"></div>
+    <div class="cb-body-shell">
+      <div class="cb-chest">
+        <span class="cb-led l1"></span>
+        <span class="cb-led l2"></span>
+        <span class="cb-led l3"></span>
+      </div>
+      <span class="cb-arm left"></span>
+      <span class="cb-arm right"></span>
+    </div>
+  </div>
+
+  <span class="cb-launcher-label">Chat with AI</span>
+
+  <span *ngIf="!hasGreeted && !open" class="cb-teaser">Hi! 👋</span>
+
+  <span *ngIf="unread > 0" class="cb-unread">{{ unread }}</span>
+</button>
+
+
+<!-- ============ CHAT PANEL ============ -->
+<div class="cb-panel" [class.is-open]="open" role="dialog" aria-label="AI Assistant">
+
+  <!-- Header -->
+  <header class="cb-panel-head">
+    <div class="cb-panel-head-info">
+      <div class="cb-panel-avatar">
+        <div class="cb-mini-robot">
+          <span class="cb-mini-antenna"></span>
+          <span class="cb-mini-visor"><i></i><i></i></span>
+        </div>
+      </div>
+      <div>
+        <div class="cb-head-name">Sayan's AI Assistant</div>
+        <div class="cb-head-status">
+          <span class="cb-dot"></span>
+          Online · Replies instantly
+        </div>
+      </div>
+    </div>
+    <button class="cb-close" (click)="toggle()" aria-label="Close chat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18M6 6l12 12"/>
+      </svg>
+    </button>
+  </header>
+
+  <!-- Messages -->
+  <div class="cb-messages" #messagesEl>
+
+    <!-- ===== EMPTY / WELCOME STATE ===== -->
+    <div *ngIf="!messages.length" class="cb-welcome">
+      <div class="cb-welcome-bot">
+        <span class="cb-w-antenna"></span>
+        <span class="cb-w-visor"><i></i><i></i></span>
+      </div>
+      <h3 class="cb-welcome-title">
+        Hi there! 👋
+      </h3>
+      <p class="cb-welcome-sub">
+        I'm Sayan's AI assistant. Ask me anything about his experience, tech stack, or how to get in touch.
+      </p>
+
+      <!-- Quick stat strip -->
+      <div class="cb-welcome-stats">
+        <div class="cb-w-stat">
+          <span class="num">6+</span>
+          <span class="lbl">Years</span>
+        </div>
+        <div class="cb-w-stat">
+          <span class="num">4</span>
+          <span class="lbl">Cloud Certs</span>
+        </div>
+        <div class="cb-w-stat">
+          <span class="num">25+</span>
+          <span class="lbl">Projects</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MESSAGES ===== -->
+    <div *ngFor="let m of messages"
+         class="cb-msg"
+         [class.is-user]="m.role === 'user'"
+         [class.is-bot]="m.role === 'bot'">
+
+      <!-- Bot avatar (only on bot messages) -->
+      <div *ngIf="m.role === 'bot'" class="cb-msg-avatar">
+        <span class="cb-mini-antenna"></span>
+        <span class="cb-mini-visor"><i></i><i></i></span>
+      </div>
+
+      <div class="cb-bubble-wrap">
+        <div class="cb-bubble">
+          <div class="cb-text" [innerHTML]="formatText(m.text)"></div>
+
+          <div *ngIf="m.cta?.length" class="cb-cta-row">
+            <a *ngFor="let c of m.cta"
+               [href]="c.href"
+               [target]="c.target || '_self'"
+               rel="noopener"
+               (click)="onCtaClick(c.href, c.target, $event)"
+               class="cb-cta">
+              {{ c.label }}
+            </a>
+          </div>
+        </div>
+
+        <!-- Timestamp -->
+        <div class="cb-time">{{ formatTime(m.ts) }}</div>
+      </div>
+    </div>
+
+    <!-- Typing indicator -->
+    <div *ngIf="isTyping" class="cb-msg is-bot">
+      <div class="cb-msg-avatar">
+        <span class="cb-mini-antenna"></span>
+        <span class="cb-mini-visor"><i></i><i></i></span>
+      </div>
+      <div class="cb-bubble-wrap">
+        <div class="cb-bubble cb-typing">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Suggestion chips with icons -->
+  <div *ngIf="!messages.length || messages.length <= 2" class="cb-suggestions">
+    <div class="cb-suggestions-label">Quick questions</div>
+    <div class="cb-suggestions-row">
+      <button *ngFor="let s of richSuggestions"
+              class="cb-sugg"
+              [style.--accent]="s.color"
+              (click)="pickSuggestion(s.text)">
+        <span class="cb-sugg-icon" [innerHTML]="s.icon"></span>
+        <span>{{ s.label }}</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Composer -->
+  <form class="cb-composer" (submit)="send(); $event.preventDefault()">
+    <div class="cb-input-wrap">
+      <input #inputEl
+             class="cb-input"
+             type="text"
+             [(ngModel)]="draft"
+             name="cbDraft"
+             placeholder="Ask anything about Sayan..."
+             autocomplete="off"
+             [disabled]="isTyping" />
+    </div>
+    <button type="submit"
+            class="cb-send"
+            [disabled]="!draft.trim() || isTyping"
+            aria-label="Send message">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m22 2-7 20-4-9-9-4 20-7z"/>
+        <path d="M22 2 11 13"/>
+      </svg>
+    </button>
+  </form>
+
+  <div class="cb-foot">
+    <span class="cb-foot-shortcut">Press <kbd>Enter</kbd> to send · <kbd>Esc</kbd> to close</span>
+  </div>
+</div>

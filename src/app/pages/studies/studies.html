@@ -1,36 +1,56 @@
-<section class="edu-wrapper px-4 md:px-10 py-16">
-  <div class="max-w-6xl mx-auto text-center">
-
-    <h2 class="edu-title mb-12">
-      Education <span class="text-blue-600">Timeline</span>
+<div class="edu-wrap">
+  <div class="edu-head">
+    <div class="eyebrow section-eyebrow" appReveal="zoom">Academic Path</div>
+    <h2 class="edu-title" appReveal="rise" delay="80">
+      Education <span class="grad gradient-sweep">Timeline</span>
     </h2>
+    <p class="edu-sub" appReveal delay="160">A foundation built on curiosity, computer science, and continuous learning.</p>
+  </div>
 
-    <div class="timeline relative">
-      <div class="grid md:grid-cols-3 gap-10">
+  <div class="timeline-grid">
+    <div *ngFor="let e of (education | async); let i = index"
+         #eduItem
+         class="edu-item"
+         appReveal="rise"
+         [delay]="i * 140">
 
-        <div
-          *ngFor="let e of (education | async); let i = index"
-          #eduItem
-          class="edu-item opacity-0 translate-y-8"
-        >
-
-          <!-- Year Circle -->
-          <div class="circle shadow-circle">
-            <div class="year">{{ e.year }}</div>
-          </div>
-
-          <!-- Arrow -->
-          <div class="arrow"></div>
-
-          <!-- Card -->
-          <div class="edu-card shadow-card">
-            <h3 class="edu-degree">{{ e.degree }}</h3>
-            <p class="edu-stream">{{ e.stream }}</p>
-            <p class="edu-inst">{{ e.institute }}</p>
-          </div>
+      <!-- Year medallion -->
+      <div class="circle">
+        <div class="circle-inner">
+          <div class="year">{{ e.year }}</div>
+          <div class="year-label">Class of</div>
         </div>
+        <div class="orbit-dot"></div>
+      </div>
 
+      <!-- Connector arrow -->
+      <div class="connector">
+        <span class="connector-line"></span>
+        <span class="connector-arrow"></span>
+      </div>
+
+      <!-- Card -->
+      <div class="edu-card card-hover">
+        <div class="degree-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6"/>
+            <path d="M2 10 12 5l10 5-10 5L2 10z"/>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+          </svg>
+        </div>
+        <h3 class="edu-degree">{{ e.degree }}</h3>
+        <p class="edu-stream">{{ e.stream }}</p>
+        <p class="edu-inst">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 21h18"/>
+            <path d="M5 21V8l7-5 7 5v13"/>
+            <path d="M9 21v-6h6v6"/>
+          </svg>
+          {{ e.institute }}
+        </p>
       </div>
     </div>
   </div>
-</section>
+</div>
