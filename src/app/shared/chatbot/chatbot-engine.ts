@@ -195,7 +195,7 @@ export class ChatbotEngine {
       patterns: [/resume|cv|download/i],
       resolve: () => ({
         text: "Here's Sayan's latest resume — feel free to download and share it.",
-        cta: [{ label: '📄 Download Resume (PDF)', href: '/resume/Resume_Sayan Pramanick.pdf', target: '_blank' }]
+        cta: [{ label: '📄 Download Resume (PDF)', href: '/resume/Resume_Sayan_Pramanick.pdf', target: '_blank' }]
       })
     },
 
