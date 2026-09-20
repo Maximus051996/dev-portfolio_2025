@@ -170,7 +170,7 @@ export class ChatbotEngine {
     {
       patterns: [/contact|email|reach|hire|connect|linked\s*in|github/i],
       resolve: ctx => ({
-        text: `📬 You can reach Sayan at:\n\n• Email: ${ctx.bio?.email || 'sayanpra07@gmail.com'}\n• Phone: ${ctx.bio?.phone || '+91-8617334125'}\n• Location: ${ctx.bio?.location || 'Ranaghat, West Bengal'}`,
+        text: `📬 You can reach Sayan at:\n\n• Email: ${ctx.bio?.email || 'sayanpra07@gmail.com'}\n• Phone: ${ctx.bio?.phone || '+91-8961520445'}\n• Location: ${ctx.bio?.location || 'Ranaghat, West Bengal'}`,
         cta: [
           { label: '✉ Open Contact Form', href: '#contact' },
           { label: '🔗 LinkedIn', href: 'https://linkedin.com/in/sayanpramanick07', target: '_blank' },
@@ -179,7 +179,7 @@ export class ChatbotEngine {
     },
     {
       patterns: [/phone|number|call|whatsapp/i],
-      resolve: ctx => `You can call him at ${ctx.bio?.phone || '+91-8617334125'}.`
+      resolve: ctx => `You can call him at ${ctx.bio?.phone || '+91-8961520445'}.`
     },
     {
       patterns: [/where (is|do) (he|you) (live|located|from)|location|city|country/i],
